@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    We are using node.js <script>
+    debugger
+    var nino = require('nino');
+    nino.serial(function(error, data) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data.toString());
+      }
+    });
+
+    document.write(process.version)</script>.
+  </body>
+</html>

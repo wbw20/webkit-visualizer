@@ -1,5 +1,11 @@
 {
   "name": "nw-demo",
-  "main": "index.html"
+  "main": "index.html",
+  "dependencies": {
+    "nino": "latest",
+    "async": "0.9.0",
+    "node-gyp": "0.13.1",
+    "serialport": "1.4.2",
+    "underscore": "1.6.0"
+  }
 }
-
