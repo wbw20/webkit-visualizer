@@ -12,7 +12,7 @@ cp -r node_modules build/temp/node_modules
 echo 'copying views...'
 cp src/index.html build/temp/index.html
 echo 'copying js...'
-cp -r src/js/**/*.js build/temp/
+cp -r src/js/app.js build/temp/app.js
 echo 'copying package.json...'
 cp package.json build/temp/package.json
 
