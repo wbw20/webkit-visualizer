@@ -13,6 +13,8 @@ echo 'copying views...'
 cp src/index.html build/temp/index.html
 echo 'copying js...'
 cp -r src/js/app.js build/temp/app.js
+echo 'copying css...'
+cp -r src/css/index.css build/temp/index.css
 echo 'copying package.json...'
 cp package.json build/temp/package.json
 
@@ -22,6 +24,6 @@ zip ../app.nw -r .
 cd ../..
 
 echo 'cleaning up...'
-rm -rf build/temp/
+# rm -rf build/temp/
 
 echo '...DONE'

@@ -1,0 +1,25 @@
+{
+  "name": "webkit-visualizer",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CarbonOrigins/webkit-visualizer",
+  "authors": [
+    "William B. Wettersten <wbw20@case.edu>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animo.js": "*",
+    "jquery": "2.1.1",
+    "ember": "1.6.1",
+    "bootstrap": "~3.2.0"
+  },
+  "resolutions": {
+    "jquery": "2.1.1"
+  }
+}

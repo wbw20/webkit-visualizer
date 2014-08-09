@@ -7,5 +7,14 @@
     "node-gyp": "0.13.1",
     "serialport": "1.4.2",
     "underscore": "1.6.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compress": "^0.10.0",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-watch": "latest"
   }
 }

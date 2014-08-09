@@ -1,6 +1,9 @@
 # build
 build/
 
+#Bower
+bower_components/
+
 # osx
 .DS_Store
 

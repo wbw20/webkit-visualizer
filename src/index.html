@@ -3,23 +3,15 @@
   <head>
     <title>Hello World!</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/ember.js/1.6.1/ember.min.js"></script>
     <script src="app.js"></script>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <h1>Hello World!</h1>
-    We are using node.js <script>
-    debugger
-    var nino = require('nino');
-    nino.serial(function(error, data) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data.toString());
-      }
-    });
-
-    document.write(process.version)</script>.
+    We are using node.js.
+    <h2>Here is our goddamned serial output</h2>
+    <h3 id="output"></h3>
   </body>
 </html>
