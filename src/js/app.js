@@ -17,11 +17,11 @@ window.App = Ember.Application.create();
 //   }
 // });
 
-nino.serial(function(error, data) {
-  if (!error) {
-    $('#output').html($('#output').html() + data);
-  } else {
-    $('#output').html('something messed up.');
-  }
-});
+// nino.serial(function(error, data) {
+//   if (!error) {
+//     $('#output').html($('#output').html() + data);
+//   } else {
+//     $('#output').html('something messed up.');
+//   }
+// });
 

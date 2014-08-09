@@ -100,5 +100,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['copy', 'concat', 'less']);
-  grunt.registerTask('package', ['copy:modules', 'copy:index', 'copy:packagejson', 'concat', 'less', 'compress', 'copy:app', 'clean']);
+
+  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:modules', 'concat', 'less']);
+  grunt.registerTask('package', ['build', 'compress', 'copy:app', 'clean']);
 };
