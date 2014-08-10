@@ -6,16 +6,16 @@ var nino = require('nino');
 
 window.App = Ember.Application.create();
 
-// App.Router.map(function() {
-//   this.resource('boards');
-//   this.resource('board', { path: '/board/:board_id' });
-// });
+App.Router.map(function() {
+  this.resource('boards');
+  this.resource('board', { path: '/board/:board_id' });
+});
 
-// App.IndexRoute = Ember.Route.extend({
-//   beforeModel: function() {
-//     this.transitionTo('boards');
-//   }
-// });
+App.IndexRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.transitionTo('boards');
+  }
+});
 
 // nino.serial(function(error, data) {
 //   if (!error) {
