@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -72,6 +73,16 @@ module.exports = function(grunt) {
         },
         files: {
           "build/temp/css/index.css": "src/less/index.less",
+        }
+      }
+    },
+    emberTemplates: {
+      compile: {
+        options: {
+          templateBasePath: 'src/handlebars'
+        },
+        files: {
+          'build/temp/templates.js': ['src/handlebars/**/*']
         }
       }
     },
