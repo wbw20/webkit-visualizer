@@ -16,5 +16,11 @@ App.BoardsController = Ember.ArrayController.extend({
       id: '124230',
       type: 'Arduino Due'
     }];
-  }.property()
+  }.property(),
+
+  actions: {
+    click: function(id) {
+      alert(id);
+    }
+  }
 });
