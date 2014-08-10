@@ -61,6 +61,7 @@ module.exports = function(grunt) {
       index_js: {
         src:[
           'src/js/app.js',
+          'build/temp/js/templates.js',
           'src/js/**/*.js'
         ],
         dest: 'build/temp/js/index.js'
@@ -82,7 +83,7 @@ module.exports = function(grunt) {
           templateBasePath: 'src/handlebars'
         },
         files: {
-          'build/temp/templates.js': ['src/handlebars/**/*']
+          'build/temp/js/templates.js': ['src/handlebars/**/*']
         }
       }
     },
@@ -112,6 +113,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['copy', 'concat', 'less']);
 
-  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:modules', 'concat', 'less']);
+  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:modules', 'emberTemplates', 'concat', 'less']);
   grunt.registerTask('package', ['build', 'compress', 'copy:app', 'clean']);
 };
