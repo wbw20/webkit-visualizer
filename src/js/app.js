@@ -24,4 +24,3 @@ App.IndexRoute = Ember.Route.extend({
 //     $('#output').html('something messed up.');
 //   }
 // });
-
