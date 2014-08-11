@@ -10,6 +10,8 @@ App.Router.map(function() {
   this.resource('boards', function() {
     this.route('show', { path: '/:board_id' });
   });
+
+  this.resource('streams');
 });
 
 App.IndexRoute = Ember.Route.extend({
