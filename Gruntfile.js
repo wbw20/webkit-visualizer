@@ -54,7 +54,8 @@ module.exports = function(grunt) {
           'bower_components/handlebars/handlebars.min.js',
           'bower_components/ember/ember.min.js',
           'bower_components/animo.js/animo.js',
-          'bower_components/bootstrap/dist/js/bootstrap.min.js'
+          'bower_components/bootstrap/dist/js/bootstrap.min.js',
+          'bower_components/three.js/three.min.js'
         ],
         dest: 'build/temp/js/vendor.js'
       },

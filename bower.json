@@ -17,7 +17,8 @@
     "animo.js": "*",
     "jquery": "2.1.1",
     "ember": "1.6.1",
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "three.js": "*"
   },
   "resolutions": {
     "jquery": "2.1.1"
