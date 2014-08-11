@@ -1,0 +1,10 @@
+<div class="row">
+  {{#each board in boards}}
+    {{#link-to "boards.show" board}}
+      <div class="col-md-4">
+        ID: <h2>{{board.id}}</h2>
+        type: <h3>{{board.type}}</h3>
+      </div>
+    {{/link-to}}
+  {{/each}}
+</div>
