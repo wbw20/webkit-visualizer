@@ -27,8 +27,6 @@ App.StreamsView = Ember.View.extend({
   },
 
   animate: function() {
-    // requestAnimationFrame(this.get('animate'));
-
     this.set('mesh.rotation.x', this.get('mesh.rotation.x') + 30);
     this.set('mesh.rotation.y', this.get('mesh.rotation.y') + 45);
 
