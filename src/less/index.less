@@ -1,7 +1,8 @@
-@import "sidebar/sidebar";
-@import "boards";
-@import "streams";
 @import "colors";
+@import "mixins";
+@import "sidebar/sidebar";
+@import "boards/boards";
+@import "streams/streams";
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
@@ -16,6 +17,7 @@ body {
 
   .right_pane {
     position: absolute;
+    width: ~"calc(100% - 100px)";
     top: 0px;
     left: 100px;
     bottom: 0px;
