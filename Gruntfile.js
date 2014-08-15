@@ -25,6 +25,14 @@ module.exports = function(grunt) {
           filter: 'isFile'
         }]
       },
+      glyphs: {
+        files: [{
+          cwd: 'bower_components/bootstrap/dist/fonts',
+          src: '**/*',
+          dest: 'build/temp/fonts',
+          expand: true
+        }]
+      },
       packagejson: {
         files: [{
           src: 'package.json',
@@ -115,6 +123,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['copy', 'concat', 'less']);
 
-  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:modules', 'emberTemplates', 'concat', 'less']);
+  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'copy:modules', 'emberTemplates', 'concat', 'less']);
   grunt.registerTask('package', ['build', 'compress', 'copy:app', 'clean']);
 };
