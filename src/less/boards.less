@@ -1,9 +1,14 @@
 @import "mixins";
+@import "colors";
 
 .boards {
   .col-md-4 {
-    .hover-color(gray);
+    .hover-color(@lighter_gray);
 
     cursor: pointer;
+    height: 300px;
+    width: 300px;
+
+    color: @very_dark;
   }
 }

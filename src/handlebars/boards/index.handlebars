@@ -1,10 +1,13 @@
-<div class="row">
-  {{#each board in boards}}
-    {{#link-to "boards.show" board}}
-      <div class="col-md-4">
-        ID: <h2>{{board.id}}</h2>
-        type: <h3>{{board.type}}</h3>
-      </div>
-    {{/link-to}}
-  {{/each}}
+<h1>Select a Device<h1>
+<div class="container">
+  <div class="row">
+    {{#each board in boards}}
+      {{#link-to "boards.show" board}}
+        <div class="col-md-4">
+          <h3>Vendor ID: {{board.vendorId}}</h3>
+          <h3>Product ID: {{board.productId}}</h3>
+        </div>
+      {{/link-to}}
+    {{/each}}
+  </div>
 </div>
