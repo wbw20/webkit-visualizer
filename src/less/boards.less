@@ -1,14 +1,25 @@
 @import "mixins";
 @import "colors";
 
-.boards {
-  .col-md-4 {
-    .hover-color(@lighter_gray);
+body .right_pane {
+  .boards {
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+    }
 
-    cursor: pointer;
-    height: 300px;
-    width: 300px;
+    .container {
+      width: 100%;
 
-    color: @very_dark;
+      .col-md-4 {
+        .hover-color(@lighter_gray);
+
+        cursor: pointer;
+        height: 300px;
+        width: 300px;
+
+        color: @very_dark;
+      }
+    }
   }
 }
