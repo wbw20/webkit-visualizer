@@ -24,6 +24,10 @@ App.BoardsIndexRoute = Ember.Route.extend({
   controllerName: 'boards'
 });
 
+App.BoardsShowRoute = Ember.Route.extend({
+  controllerName: 'streams'
+});
+
 // nino.serial(function(error, data) {
 //   if (!error) {
 //     $('#output').html($('#output').html() + data);
