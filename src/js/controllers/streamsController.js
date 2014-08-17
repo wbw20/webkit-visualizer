@@ -1,5 +1,11 @@
 App.StreamsController = Ember.ObjectController.extend({
-  stream: null,
+  stream: {
+    accelerometer: {
+      x: 0,
+      y: 0,
+      z: 0
+    }
+  },
 
   init: function() {
     var self = this;
@@ -14,9 +20,9 @@ App.StreamsController = Ember.ObjectController.extend({
 
   isvalidJSON: function(str) {
     try {
-        JSON.parse(str);
+      JSON.parse(str);
     } catch (e) {
-        return false;
+      return false;
     }
     return true;
   }

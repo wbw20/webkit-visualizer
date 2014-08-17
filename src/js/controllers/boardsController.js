@@ -9,7 +9,6 @@ App.BoardsController = Ember.ArrayController.extend({
     Ember.run.later(this, function() {
       this.scan();
       this.constantScan();
-      console.log('rescan');
     }, 200);
   },
 

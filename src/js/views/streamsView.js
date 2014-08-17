@@ -27,8 +27,9 @@ App.StreamsView = Ember.View.extend({
   },
 
   animate: function() {
-    this.set('mesh.rotation.x', this.get('mesh.rotation.x') + 30);
-    this.set('mesh.rotation.y', this.get('mesh.rotation.y') + 45);
+    this.set('mesh.rotation.x', Ember.computed.oneWay('controller.stream.accelerometer.x'));
+    this.set('mesh.rotation.y', Ember.computed.oneWay('controller.stream.accelerometer.y'));
+    this.set('mesh.rotation.z', Ember.computed.oneWay('controller.stream.accelerometer.z'));
 
     this.get('renderer').render(this.get('scene'), this.get('camera'));
   }
