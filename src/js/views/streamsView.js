@@ -4,6 +4,14 @@ App.StreamsView = Ember.View.extend({
   camera: null,
   mesh: null,
   renderer: null,
+  accelerometerBinding: 'controller.stream.accelerometer',
+
+  accelerometerObserver: function() {
+    this.set('mesh.rotation.x', this.get('accelerometer.x') * 90);
+    this.set('mesh.rotation.y', this.get('accelerometer.y') * 90);
+    this.set('mesh.rotation.z', this.get('accelerometer.z') * 90);
+    this.get('renderer').render(this.get('scene'), this.get('camera'));
+  }.observes('accelerometer'),
 
   didInsertElement: function() {
     this.set('scene', new THREE.Scene());
@@ -27,10 +35,6 @@ App.StreamsView = Ember.View.extend({
   },
 
   animate: function() {
-    this.bind('mesh.rotation.x', 'controller.stream.accelerometer.x');
-    this.bind('mesh.rotation.y', 'controller.stream.accelerometer.y');
-    this.bind('mesh.rotation.z', 'controller.stream.accelerometer.z');
-
     this.get('renderer').render(this.get('scene'), this.get('camera'));
   }
 });
