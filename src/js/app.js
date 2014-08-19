@@ -2,7 +2,8 @@
  *  All requires go here and are global
  *  across all of our js.
  */
-var nino = require('nino');
+var nino = require('nino'),
+    fs   = require('fs');
 
 window.App = Ember.Application.create();
 
@@ -27,11 +28,3 @@ App.BoardsIndexRoute = Ember.Route.extend({
 App.BoardsShowRoute = Ember.Route.extend({
   controllerName: 'streams'
 });
-
-// nino.serial(function(error, data) {
-//   if (!error) {
-//     $('#output').html($('#output').html() + data);
-//   } else {
-//     $('#output').html('something messed up.');
-//   }
-// });

@@ -2,7 +2,7 @@ App.BoardsController = Ember.ArrayController.extend({
   boards: [],
 
   init: function() {
-    this.constantScan();
+    this.scan();
   },
 
   constantScan: function() {

@@ -9,12 +9,19 @@ App.StreamsController = Ember.ObjectController.extend({
 
   init: function() {
     var self = this;
-    nino.serial(function(err, data) {
-      if (err) {
-        Ember.Logger.warn('Error: ' + err);
-      } else if (self.isvalidJSON(data)) {
-        self.set('stream', JSON.parse(data));
-      }
+    nino.first(function(port) {
+      var readStream = fs.createReadStream(port.comName);
+
+      readStream.on('data', function (data) {
+        if (self.isvalidJSON(data)) {
+          console.log(JSON.parse(data));
+          self.set('stream', JSON.parse(data));
+        }
+      });
+
+      readStream.on('error', function (error) {
+        Ember.Logger.warn('Error: ' + error);
+      });
     });
   },
 
