@@ -17,15 +17,13 @@ App.BoardsController = Ember.ArrayController.extend({
     var self = this;
 
     nino.list(function(boards) {
-      var arr = [];
-
-      boards.forEach(function(item) {
-        if (!_.contains(self.get('boards'), item)) {
-          arr.push(item);
-        }
-      });
-
-      self.set('boards', arr);
+      if (self.get('boards').length != boards.length) {
+        //TODO:  why cant we do it the easy way?
+        self.set('boards', []);
+        boards.forEach(function(board) {
+          self.get('boards').push(board);
+        });
+      }
     });
   }
 });
