@@ -1,5 +1,6 @@
 App.StreamsController = Ember.ObjectController.extend({
-  stream: {
+  stream: null,
+  data: {
     accelerometer: {
       x: 0,
       y: 0,
@@ -10,19 +11,28 @@ App.StreamsController = Ember.ObjectController.extend({
   init: function() {
     var self = this;
     nino.first(function(port) {
-      var readStream = fs.createReadStream(port.comName);
-
-      readStream.on('data', function (data) {
-        if (self.isvalidJSON(data)) {
-          console.log(JSON.parse(data));
-          self.set('stream', JSON.parse(data));
-        }
-      });
-
-      readStream.on('error', function (error) {
-        Ember.Logger.warn('Error: ' + error);
-      });
+      self.setupStream(port);
     });
+  },
+
+  setupStream: function(port) {
+    var self = this;
+    this.set('stream', fs.createReadStream(port.comName));
+
+    this.get('stream').on('data', function (data) {
+      if (self.isvalidJSON(data)) {
+        console.log('data');
+        self.set('data', JSON.parse(data));
+      }
+    });
+
+    this.get('stream').on('error', function (error) {
+      Ember.Logger.warn('Error: ' + error);
+    });
+  },
+
+  teardownStream: function() {
+    this.get('stream').pause();
   },
 
   isvalidJSON: function(str) {

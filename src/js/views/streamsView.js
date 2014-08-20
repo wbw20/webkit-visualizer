@@ -4,7 +4,7 @@ App.StreamsView = Ember.View.extend({
   camera: null,
   mesh: null,
   renderer: null,
-  accelerometerBinding: 'controller.stream.accelerometer',
+  accelerometerBinding: 'controller.data.accelerometer',
 
   didInsertElement: function() {
     this.set('scene', new THREE.Scene());
@@ -25,6 +25,10 @@ App.StreamsView = Ember.View.extend({
 
     $('.streams').append(this.get('renderer.domElement'));
     this.animate();
+  },
+
+  willDestroyElement: function(event) {
+    this.get('controller').teardownStream();
   },
 
   animate: function() {
