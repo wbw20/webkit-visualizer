@@ -19,7 +19,8 @@
     "ember": "1.6.1",
     "underscore": "1.6.0",
     "bootstrap": "~3.2.0",
-    "three.js": "*"
+    "three.js": "*",
+    "d3": "3.4.11"
   },
   "resolutions": {
     "jquery": "2.1.1"

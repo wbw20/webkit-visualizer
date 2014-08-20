@@ -64,7 +64,8 @@ module.exports = function(grunt) {
           'bower_components/underscore/underscore.js',
           'bower_components/animo.js/animo.js',
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
-          'bower_components/three.js/three.min.js'
+          'bower_components/three.js/three.min.js',
+          'bower_components/d3/d3.min.js'
         ],
         dest: 'build/temp/js/vendor.js'
       },
