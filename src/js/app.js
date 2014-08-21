@@ -11,7 +11,7 @@ App.Router.map(function() {
   this.resource('boards', function() {
     this.route('show', { path: '/:board_id' });
 
-    this.resource('streams', function() {
+    this.resource('streams', { path: '/:board_id/streams' }, function() {
       this.route('show');
     });
   });
@@ -24,18 +24,28 @@ App.IndexRoute = Ember.Route.extend({
 });
 
 App.BoardsIndexRoute = Ember.Route.extend({
-  controllerName: 'boards'
+  controllerName: 'boards',
+  renderTemplate: function() {
+    this.render({
+      outlet: 'boards'
+    });
+  }
 });
 
 App.BoardsShowRoute = Ember.Route.extend({
-  controllerName: 'streams'
-});
-
-App.StreamsIndexRoute = Ember.Route.extend({
+  controllerName: 'streams',
   renderTemplate: function() {
     this.render({
-      into: 'boards.show',
-      outlet: 'stream'
+      outlet: 'boards'
+    });
+  }
+});
+
+App.StreamsShowRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    debugger
+    this.render({
+      outlet: 'boards'
     });
   }
 });

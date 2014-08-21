@@ -1,5 +1,32 @@
 The streams template
 
 <div class="streams">
-  {{outlet}}
+  {{outlet stream}}
+
+  <div class="stream_nav">
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-globe">
+      </span>
+    {{/link-to}}
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-flash">
+      </span>
+    {{/link-to}}
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-floppy-open">
+      </span>
+    {{/link-to}}
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-cog">
+      </span>
+    {{/link-to}}
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-link">
+      </span>
+    {{/link-to}}
+    {{#link-to "streams.show"}}
+      <span class="glyphicon glyphicon-send">
+      </span>
+    {{/link-to}}
+  </div>
 </div>
