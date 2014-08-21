@@ -17,22 +17,22 @@ App.StreamsController = Ember.ObjectController.extend({
 
   setupStream: function(port) {
     var self = this;
-    this.set('stream', fs.createReadStream(port.comName));
+    // this.set('stream', fs.createReadStream(port.comName));
 
-    this.get('stream').on('data', function (data) {
-      if (self.isvalidJSON(data)) {
-        console.log('data');
-        self.set('data', JSON.parse(data));
-      }
-    });
+    // this.get('stream').on('data', function (data) {
+    //   if (self.isvalidJSON(data)) {
+    //     console.log('data');
+    //     self.set('data', JSON.parse(data));
+    //   }
+    // });
 
-    this.get('stream').on('error', function (error) {
-      Ember.Logger.warn('Error: ' + error);
-    });
+    // this.get('stream').on('error', function (error) {
+    //   Ember.Logger.warn('Error: ' + error);
+    // });
   },
 
   teardownStream: function() {
-    this.get('stream').pause();
+    // this.get('stream').pause();
   },
 
   isvalidJSON: function(str) {

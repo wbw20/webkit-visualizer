@@ -1,15 +1,18 @@
 App.BoardsController = Ember.ArrayController.extend({
-  boards: [],
+  boards: [{
+    vendorId: 'Carbon Origins',
+    productId: 'Apollo'
+  }],
 
   init: function() {
     this.constantScan();
   },
 
   constantScan: function() {
-    Ember.run.later(this, function() {
-      this.scan();
-      this.constantScan();
-    }, 200);
+    // Ember.run.later(this, function() {
+    //   this.scan();
+    //   this.constantScan();
+    // }, 200);
   },
 
   /* Look for more Apollos */

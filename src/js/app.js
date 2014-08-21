@@ -30,3 +30,12 @@ App.BoardsIndexRoute = Ember.Route.extend({
 App.BoardsShowRoute = Ember.Route.extend({
   controllerName: 'streams'
 });
+
+App.StreamsIndexRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({
+      into: 'boards.show',
+      outlet: 'stream'
+    });
+  }
+});
