@@ -1,4 +1,4 @@
-App.StreamsController = Ember.ObjectController.extend({
+App.GyroscopeController = Ember.ObjectController.extend({
   stream: null,
   data: {
     accelerometer: {
@@ -9,6 +9,7 @@ App.StreamsController = Ember.ObjectController.extend({
   },
 
   init: function() {
+    debugger
     var self = this;
     nino.first(function(port) {
       self.setupStream(port);
