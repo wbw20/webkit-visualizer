@@ -28,7 +28,6 @@ App.IndexRoute = Ember.Route.extend({
 App.BoardsIndexRoute = Ember.Route.extend({
   controllerName: 'boards',
   renderTemplate: function() {
-    debugger
     this.render({
       outlet: 'boards'
     });
