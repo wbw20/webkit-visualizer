@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     {{#each board in boards}}
-      {{#link-to "boards.show" board}}
+      {{#link-to "board" board}}
         <div class="col-md-4">
           <h3>Vendor ID: {{board.vendorId}}</h3>
           <h3>Product ID: {{board.productId}}</h3>

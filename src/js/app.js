@@ -9,9 +9,11 @@ window.App = Ember.Application.create();
 
 App.Router.map(function() {
   this.resource('boards', function() {
-    this.route('show', { path: '/:board_id' });
+    this.route('index');
+  });
 
-    this.resource('streams', { path: '/:board_id/streams' }, function() {
+  this.resource('board', { path: '/boards/:board_id' }, function() {
+    this.resource('streams', function() {
       this.route('show');
     });
   });
@@ -26,6 +28,7 @@ App.IndexRoute = Ember.Route.extend({
 App.BoardsIndexRoute = Ember.Route.extend({
   controllerName: 'boards',
   renderTemplate: function() {
+    debugger
     this.render({
       outlet: 'boards'
     });
@@ -41,11 +44,11 @@ App.BoardsShowRoute = Ember.Route.extend({
   }
 });
 
-App.StreamsShowRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    debugger
-    this.render({
-      outlet: 'boards'
-    });
-  }
-});
+// App.StreamsShowRoute = Ember.Route.extend({
+//   renderTemplate: function() {
+//     debugger
+//     this.render({
+//       outlet: 'boards'
+//     });
+//   }
+// });
