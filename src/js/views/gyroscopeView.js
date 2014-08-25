@@ -1,5 +1,4 @@
 App.GyroscopeView = Ember.View.extend({
-  templateName: 'streams',
   // scene: null,
   // camera: null,
   // mesh: null,
@@ -7,7 +6,6 @@ App.GyroscopeView = Ember.View.extend({
   // accelerometerBinding: 'controller.data.accelerometer',
 
   didInsertElement: function() {
-    debugger
     // this.set('scene', new THREE.Scene());
     // this.set('camera', new THREE.PerspectiveCamera( 75, 1, 1, 10000 ));
     // this.set('camera.position.z', 1000);

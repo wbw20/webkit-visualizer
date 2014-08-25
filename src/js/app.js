@@ -12,9 +12,7 @@ App.Router.map(function() {
     this.route('index');
   });
 
-  this.resource('board', { path: '/boards/:board_id' });
-
-  this.resource('streams', function() {
+  this.resource('board', { path: '/boards/:board_id' }, function() {
     this.route('gyroscope');
   });
 });
@@ -34,20 +32,6 @@ App.BoardsIndexRoute = Ember.Route.extend({
   }
 });
 
-App.BoardsShowRoute = Ember.Route.extend({
-  controllerName: 'streams',
-  renderTemplate: function() {
-    this.render({
-      outlet: 'boards'
-    });
-  }
-});
-
-App.StreamsGyroscopeRoute = Ember.Route.extend({
-  controllerName: 'streams',
-  renderTemplate: function() {
-    this.render({
-      outlet: 'streams'
-    });
-  }
-});
+// App.BoardGyroscopeRoute = Ember.Route.extend({
+//   controllerName: 'streams'
+// });
