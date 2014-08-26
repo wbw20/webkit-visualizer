@@ -32,6 +32,7 @@ App.BoardGyroscopeController = Ember.ObjectController.extend({
   },
 
   teardownStream: function() {
+    this.get('stream').close();
     this.set('stream', null);
   },
 

@@ -22,7 +22,7 @@ App.BoardGyroscopeView = Ember.View.extend({
     this.set('renderer', new THREE.CanvasRenderer());
     this.get('renderer').setSize(500, 500);
 
-    $('.streams').append(this.get('renderer.domElement'));
+    $('.gyroscope').append(this.get('renderer.domElement'));
     this.animate();
   },
 
