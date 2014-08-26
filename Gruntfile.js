@@ -125,6 +125,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['copy', 'concat', 'less']);
 
+  grunt.registerTask('build-quick', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'emberTemplates', 'concat', 'less']);
+  grunt.registerTask('package-quick', ['build-quick', 'compress', 'copy:app']);
+
   grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'copy:modules', 'emberTemplates', 'concat', 'less']);
   grunt.registerTask('package', ['build', 'compress', 'copy:app', 'clean']);
 };

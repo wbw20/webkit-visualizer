@@ -13,7 +13,14 @@ App.Router.map(function() {
   });
 
   this.resource('board', { path: '/boards/:board_id' }, function() {
+    this.route('accelerometer');
+    this.route('gps');
     this.route('gyroscope');
+    this.route('humidity');
+    this.route('luminosity');
+    this.route('magnetometer');
+    this.route('pressure');
+    this.route('temperature');
   });
 });
 
