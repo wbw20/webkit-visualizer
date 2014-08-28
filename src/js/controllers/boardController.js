@@ -5,11 +5,11 @@ App.BoardController = Ember.ObjectController.extend({
       x: 0,
       y: 0,
       z: 0
-    }
+    },
+    temperature: 5
   },
 
   init: function() {
-    debugger
     var self = this;
     nino.first(function(port) {
       self.setupStream(port);
@@ -22,8 +22,8 @@ App.BoardController = Ember.ObjectController.extend({
 
     this.get('stream').on('data', function (data) {
       if (self.isvalidJSON(data)) {
-        console.log('data');
         self.set('data', JSON.parse(data));
+        self.set('data.temperature', Math.random() * 10);
       }
     });
 
