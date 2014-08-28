@@ -52,7 +52,8 @@ module.exports = function(grunt) {
       vendor_css: {
         src: [
           'bower_components/animo.js/animate+animo.css',
-          'bower_components/bootstrap/dist/css/bootstrap.css'
+          'bower_components/bootstrap/dist/css/bootstrap.css',
+          'bower_components/c3/c3.css'
         ],
         dest: 'build/temp/css/vendor.css'
       },
@@ -65,7 +66,8 @@ module.exports = function(grunt) {
           'bower_components/animo.js/animo.js',
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
           'bower_components/three.js/three.min.js',
-          'bower_components/d3/d3.min.js'
+          'bower_components/d3/d3.min.js',
+          'bower_components/c3/c3.min.js'
         ],
         dest: 'build/temp/js/vendor.js'
       },
