@@ -8,6 +8,8 @@ App.BoardController = Ember.ObjectController.extend({
     }
   },
   temperature: 30,
+  humidity: 70,
+  pressure: 5,
 
   init: function() {
     var self = this;
@@ -24,6 +26,8 @@ App.BoardController = Ember.ObjectController.extend({
       if (self.isvalidJSON(data)) {
         self.set('data', JSON.parse(data));
         self.set('data.temperature', self.get('temperature') + Math.random() * 0.7);
+        self.set('data.humidity', self.get('humidity') + Math.random() * 0.7);
+        self.set('data.pressure', self.get('pressure') + Math.random() * 0.7);
       }
     });
 

@@ -46,3 +46,7 @@ App.BoardGyroscopeRoute = Ember.Route.extend({
 App.BoardTemperatureRoute = Ember.Route.extend({
   controllerName: 'board'
 });
+
+App.BoardPressureRoute = Ember.Route.extend({
+  controllerName: 'board'
+});
