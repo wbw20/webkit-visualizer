@@ -1,7 +1,6 @@
 App.DataView = Ember.View.extend({
   chart: null,
   source: null,
-  controllerName: 'board',
   points: ['temperature'],
 
   pushData: function(obj, key, value) {
