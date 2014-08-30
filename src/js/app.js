@@ -50,3 +50,7 @@ App.BoardTemperatureRoute = Ember.Route.extend({
 App.BoardPressureRoute = Ember.Route.extend({
   controllerName: 'board'
 });
+
+App.BoardHumidityRoute = Ember.Route.extend({
+  controllerName: 'board'
+});
