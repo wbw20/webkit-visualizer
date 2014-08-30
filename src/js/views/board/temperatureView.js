@@ -19,10 +19,17 @@ App.BoardTemperatureView = Ember.View.extend({
     this.get('data').push(this.get('temperature'));
 
     this.set('chart', c3.generate({
+      type: 'spline',
       data: {
         columns: [
           this.get('data').valueOf()
         ]
+      },
+      axis: {
+        y: {
+          max: 40,
+          min: 0
+        }
       }
     }));
 

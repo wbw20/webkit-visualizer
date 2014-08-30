@@ -7,7 +7,7 @@ App.BoardController = Ember.ObjectController.extend({
       z: 0
     }
   },
-  temperature: 10,
+  temperature: 30,
 
   init: function() {
     var self = this;
