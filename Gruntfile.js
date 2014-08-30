@@ -33,6 +33,14 @@ module.exports = function(grunt) {
           expand: true
         }]
       },
+      assets: {
+        files: [{
+          cwd: 'src/assets',
+          src: '**/*',
+          dest: 'build/temp/assets',
+          expand: true
+        }]
+      },
       packagejson: {
         files: [{
           src: 'package.json',
@@ -127,9 +135,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['copy', 'concat', 'less']);
 
-  grunt.registerTask('build-quick', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'emberTemplates', 'concat', 'less']);
+  grunt.registerTask('build-quick', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'copy:assets', 'emberTemplates', 'concat', 'less']);
   grunt.registerTask('package-quick', ['build-quick', 'compress', 'copy:app']);
 
-  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'copy:modules', 'emberTemplates', 'concat', 'less']);
+  grunt.registerTask('build', ['copy:index', 'copy:packagejson', 'copy:glyphs', 'copy:assets', 'copy:modules', 'emberTemplates', 'concat', 'less']);
   grunt.registerTask('package', ['build', 'compress', 'copy:app', 'clean']);
 };

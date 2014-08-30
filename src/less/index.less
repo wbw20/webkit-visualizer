@@ -6,6 +6,8 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: @light_gray;
 }
 
 a {
@@ -13,7 +15,7 @@ a {
 }
 
 body {
-  background-color: @white;
+  background-image: url('../assets/background.png');
 
   .right_pane {
     position: absolute;
@@ -21,8 +23,5 @@ body {
     top: 0px;
     left: 100px;
     bottom: 0px;
-
-    /* we don't want things under the sidebar shadow */
-    padding-left: 6px;
   }
 }
