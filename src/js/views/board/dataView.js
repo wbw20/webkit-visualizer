@@ -24,12 +24,7 @@ App.DataView = Ember.View.extend({
           this.get('points').valueOf()
         ]
       },
-      axis: {
-        y: {
-          max: 40,
-          min: 0
-        }
-      }
+      axis: this.get('axis')
     }));
 
     $('.chart').append(this.get('chart').element);
