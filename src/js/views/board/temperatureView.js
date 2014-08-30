@@ -1,6 +1,6 @@
 App.BoardTemperatureView = App.DataView.extend({
   // name: 'temperature',
-  // source: 'controller.data.temperature',
+  temperatureBinding: 'controller.data.temperature'
   // axis: {
   //   y: {
   //     max: 40,

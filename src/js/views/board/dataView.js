@@ -1,7 +1,8 @@
 App.DataView = Ember.View.extend({
   chart: null,
+  source: null,
   data: ['temperature'],
-  temperatureBinding: 'controller.data.temperature',
+  controllerName: 'board',
 
   pushData: function(obj, key, value) {
     if (!this.get('chart')) { return; }
@@ -13,7 +14,7 @@ App.DataView = Ember.View.extend({
         this.get('data').valueOf()
       ]
     });
-  }.observes('controller.data'),
+  }.observes('temperature'),
 
   didInsertElement: function() {
     this.get('data').push(this.get('temperature'));
