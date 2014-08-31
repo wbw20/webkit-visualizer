@@ -1,13 +1,12 @@
-<h2>Select a Device</h2>
-<div class="container">
-  <div class="row">
+<div class="horizontal">
+  <ul>
     {{#each board in boards}}
       {{#link-to "board" board}}
-        <div class="col-md-4">
+        <li>
           <h3>Vendor ID: {{board.vendorId}}</h3>
           <h3>Product ID: {{board.productId}}</h3>
-        </div>
+        </li>
       {{/link-to}}
     {{/each}}
-  </div>
+  </ul>
 </div>

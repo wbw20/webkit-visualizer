@@ -5,17 +5,29 @@ body .right_pane {
       text-align: center;
     }
 
-    .container {
-      width: 100%;
+    @height: 200px;
 
-      .col-md-4 {
-        .hover-color(@lighter_gray);
+    div.horizontal {
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
 
-        cursor: pointer;
-        height: 300px;
-        width: 300px;
+      ul {
+        height: @height;
+        width: 1500px;
+        padding: 0px;
+        min-width: 100%;
+        text-align: justify;
 
-        color: @very_dark;
+        li {
+          .hover-color(@lighter_gray);
+
+          display: inline-block;
+          cursor: pointer;
+          height: @height;
+          width: 300px;
+
+          color: @very_dark;
+        }
       }
     }
   }
