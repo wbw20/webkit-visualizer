@@ -22,6 +22,8 @@ App.Router.map(function() {
     this.route('pressure');
     this.route('temperature');
   });
+
+  this.route('world');
 });
 
 App.IndexRoute = Ember.Route.extend({
