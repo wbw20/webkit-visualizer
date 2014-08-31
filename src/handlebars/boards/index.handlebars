@@ -3,8 +3,13 @@
     {{#each board in boards}}
       {{#link-to "board" board}}
         <li>
-          <h3>Vendor ID: {{board.vendorId}}</h3>
-          <h3>Product ID: {{board.productId}}</h3>
+          <div class="container">
+            <h3>{{board.productId}}</h3>
+            <div class="outline"></div>
+            <div class="stoplight">
+              {{view App.CircleView}}
+            </div>
+          </div>
         </li>
       {{/link-to}}
     {{/each}}
