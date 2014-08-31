@@ -24,6 +24,7 @@ App.Router.map(function() {
   });
 
   this.route('world');
+  this.route('settings');
 });
 
 App.IndexRoute = Ember.Route.extend({

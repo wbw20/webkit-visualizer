@@ -1,3 +1,5 @@
+@margin: 33px;
+
 .sidebar {
   width: 100px;
   position: absolute;
@@ -5,19 +7,25 @@
   top: 0px;
   left: 0px;
   bottom: 0px;
+  z-index: 1000;
 
-  filter: blur(0.3);
   background-color: @gray_clearer;
 
   .glyphicon {
     font-size: xx-large;
-    margin: 25px 0px 0px 32px;
-    color: @lighter_gray;
+    margin: @margin 0px 0px @margin;
+    color: @light_gray;
 
     cursor: pointer;
 
     &:hover {
-      color: @light_gray;
+      color: @medium_light_gray;
     }
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: @margin;
   }
 }
