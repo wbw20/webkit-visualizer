@@ -12,10 +12,10 @@ App.BoardController = Ember.ObjectController.extend({
   pressure: 5,
 
   init: function() {
-    var self = this;
-    nino.first(function(port) {
-      self.setupStream(port);
-    });
+    // var self = this;
+    // nino.first(function(port) {
+    //   self.setupStream(port);
+    // });
   },
 
   setupStream: function(port) {
