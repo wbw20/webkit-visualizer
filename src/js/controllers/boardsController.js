@@ -2,6 +2,12 @@ App.BoardsController = Ember.ArrayController.extend({
   boards: [{
     productId: 'Apollo',
     vendorId: 'Carbon Origins'
+  }, {
+    productId: 'Apollo',
+    vendorId: 'Carbon Origins'
+  }, {
+    productId: 'Due',
+    vendorId: 'Arduino'
   }],
 
   init: function() {
