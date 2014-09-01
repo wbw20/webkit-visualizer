@@ -12,9 +12,19 @@ module.exports = function(grunt) {
     copy: {
       modules: {
         files: [{
-          cwd: 'node_modules',
+          cwd: 'node_modules/async',
           src: '**/*',
-          dest: 'build/temp/node_modules',
+          dest: 'build/temp/node_modules/async',
+          expand: true
+        }, {
+          cwd: 'node_modules/serialport',
+          src: '**/*',
+          dest: 'build/temp/node_modules/serialport',
+          expand: true
+        }, {
+          cwd: 'node_modules/underscore',
+          src: '**/*',
+          dest: 'build/temp/node_modules/underscore',
           expand: true
         }]
       },
