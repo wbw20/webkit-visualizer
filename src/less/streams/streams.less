@@ -2,6 +2,33 @@
   position: absolute;
   top: 0px;
   right: 0px;
+
+  svg {
+    height: 40px;
+    width: 60px;
+
+    path {
+      fill: none;
+    }
+
+    &.one {
+      .first {
+        fill: green;
+      }
+    }
+
+    &.two {
+      .first, .second {
+        fill: green;
+      }
+    }
+
+    &.three {
+      .first, .second, .third {
+        fill: green;
+      }
+    }
+  }
 }
 
 .stream_nav {
