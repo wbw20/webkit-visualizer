@@ -9,7 +9,6 @@ body .right_pane {
 
     div.horizontal {
       overflow-x: scroll;
-      -webkit-overflow-scrolling: touch;
 
       ul {
         height: 200px;
@@ -20,9 +19,6 @@ body .right_pane {
           display: inline-block;
 
           .container {
-            .hover-color(@lighter_gray);
-
-            cursor: pointer;
             height: 180px;
             width: 250px;
             margin: 10px auto;
@@ -51,9 +47,16 @@ body .right_pane {
       padding: 0px 0px 0px 100px;
     }
 
-    .outline {
+    .board {
       height: 100px;
       width: 200px;
+
+      svg {
+        fill: clear;
+
+        .hover-fill(@lighter_gray);
+        cursor: pointer;
+      }
     }
   }
 }

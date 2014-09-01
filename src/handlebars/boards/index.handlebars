@@ -1,19 +1,19 @@
 <div class="horizontal">
   <ul class="boards_list">
     {{#each board in boards}}
-      {{#link-to "board" board}}
-        <li>
-          <div class="container">
-            <h3>{{board.productId}}</h3>
-            <div class="outline">
+      <li>
+        <div class="container">
+          <h3>{{board.productId}}</h3>
+          {{#link-to "board" board}}
+            <div class="board">
               {{view App.OutlineView}}
             </div>
-            <div class="stoplight">
-              {{view App.CircleView}}
-            </div>
+          {{/link-to}}
+          <div class="stoplight">
+            {{view App.CircleView}}
           </div>
-        </li>
-      {{/link-to}}
+        </div>
+      </li>
     {{/each}}
   </ul>
 </div>

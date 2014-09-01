@@ -9,3 +9,15 @@
     background-color: @color;
   }
 }
+
+.hover-fill(@color) {
+  -webkit-transition: fill 200ms linear;
+  -moz-transition: fill 200ms linear;
+  -o-transition: fill 200ms linear;
+  -ms-transition: fill 200ms linear;
+  transition: fill 200ms linear;
+
+  &:hover {
+    fill: @color;
+  }
+}
