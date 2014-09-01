@@ -13,6 +13,8 @@ App.Router.map(function() {
   });
 
   this.resource('board', { path: '/boards/:board_id' }, function() {
+    this.route('live');
+
     this.route('accelerometer');
     this.route('gps');
     this.route('gyroscope');
@@ -41,6 +43,12 @@ App.BoardsIndexRoute = Ember.Route.extend({
     });
   }
 });
+
+App.BoardIndexRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.transitionTo('board.live');
+  }
+})
 
 App.BoardGyroscopeRoute = Ember.Route.extend({
   controllerName: 'board'
