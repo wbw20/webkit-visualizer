@@ -11,6 +11,17 @@ App.BoardController = Ember.ObjectController.extend({
   humidity: 70,
   pressure: 5,
 
+  programMemory: 40,
+  sdMemory: 15,
+
+  programMemoryWidth: function() {
+    return this.get('programMemory') + '%';
+  }.property(),
+
+  sdMemoryWidth: function() {
+    return this.get('sdMemory') + '%';
+  }.property(),
+
   init: function() {
     // var self = this;
     // nino.first(function(port) {

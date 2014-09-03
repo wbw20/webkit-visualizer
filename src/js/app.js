@@ -50,6 +50,10 @@ App.BoardIndexRoute = Ember.Route.extend({
   }
 })
 
+App.BoardLiveRoute = Ember.Route.extend({
+  controllerName: 'board'
+});
+
 App.BoardGyroscopeRoute = Ember.Route.extend({
   controllerName: 'board'
 });
@@ -63,5 +67,9 @@ App.BoardPressureRoute = Ember.Route.extend({
 });
 
 App.BoardHumidityRoute = Ember.Route.extend({
+  controllerName: 'board'
+});
+
+App.BoardLiveRoute = Ember.Route.extend({
   controllerName: 'board'
 });
