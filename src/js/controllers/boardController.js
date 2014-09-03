@@ -11,15 +11,15 @@ App.BoardController = Ember.ObjectController.extend({
   humidity: 70,
   pressure: 5,
 
-  programMemory: 40,
-  sdMemory: 15,
+  flashMemory: 43,
+  sdMemory: 21,
 
-  programMemoryWidth: function() {
-    return this.get('programMemory') + '%';
+  flashMemoryStyle: function() {
+    return 'width: ' + this.get('flashMemory') + '%';
   }.property(),
 
-  sdMemoryWidth: function() {
-    return this.get('sdMemory') + '%';
+  sdMemoryStyle: function() {
+    return 'width: ' + this.get('sdMemory') + '%';
   }.property(),
 
   init: function() {
