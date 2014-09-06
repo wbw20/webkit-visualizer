@@ -47,8 +47,11 @@ App.BoardController = Ember.ObjectController.extend({
     this.set('stream', null);
   },
 
-  getData: function() {
-    this.get('stream').write("{ \"command\": \"pressure\" }");
+  /*
+   *  Write the the currently selected device
+   */
+  write: function(object) {
+    this.get('stream').write(JSON.stringify(object));
   },
 
   isvalidJSON: function(str) {
