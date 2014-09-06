@@ -2,8 +2,8 @@
  *  All requires go here and are global
  *  across all of our js.
  */
-var fs   = require('fs'),
-    serialport = require('serialport');
+var fs = require('fs'),
+    sp = require('serialport');
 
 window.App = Ember.Application.create();
 

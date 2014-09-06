@@ -27,25 +27,28 @@ App.BoardController = Ember.ObjectController.extend({
     if (!this.get('model.comName')) { return; }
 
     var self = this;
-    this.set('stream', fs.createReadStream(this.get('model.comName')));
+    this.set('stream', new sp.SerialPort(this.get('model.comName'), {
+      baudrate: 115200
+    }, false));
 
-    this.get('stream').on('data', function (data) {
-      console.log('data');
-    });
+    this.get('stream').open(function(error) {
+      if (error) {
+        Ember.Logger.warn('Error: ' + error);
+      }
 
-    // this.get('stream').write("{ \"command\": \"pressure\" }", function(err, results) {
-    //   console.log('err ' + err);
-    //   console.log('results ' + results);
-    // });
-
-    this.get('stream').on('error', function (error) {
-      Ember.Logger.warn('Error: ' + error);
-    });
+      self.get('stream').on('data', function (data) {
+        console.log(data.toString());
+      });
+    }); 
   },
 
   teardownStream: function() {
     this.get('stream').close();
     this.set('stream', null);
+  },
+
+  getData: function() {
+    this.get('stream').write("{ \"command\": \"pressure\" }");
   },
 
   isvalidJSON: function(str) {

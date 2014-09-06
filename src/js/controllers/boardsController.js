@@ -16,7 +16,7 @@ App.BoardsController = Ember.ArrayController.extend({
   scan: function() {
     var self = this;
 
-    serialport.list(function(err, boards) {
+    sp.list(function(err, boards) {
       if (self.get('boards').length != boards.length) {
         //TODO:  why cant we do it the easy way?
         self.set('boards', []);
