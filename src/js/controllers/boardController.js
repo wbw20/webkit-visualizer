@@ -1,4 +1,5 @@
 App.BoardController = Ember.ObjectController.extend({
+  board: null,
   stream: null,
   data: {
     accelerometer: {
@@ -22,25 +23,20 @@ App.BoardController = Ember.ObjectController.extend({
     return 'width: ' + this.get('sdMemory') + '%';
   }.property(),
 
-  init: function() {
-    // var self = this;
-    // nino.first(function(port) {
-    //   self.setupStream(port);
-    // });
-  },
+  setupStream: function() {
+    if (!this.get('model.comName')) { return; }
 
-  setupStream: function(port) {
     var self = this;
-    this.set('stream', fs.createReadStream(port.comName));
+    this.set('stream', fs.createReadStream(this.get('model.comName')));
 
     this.get('stream').on('data', function (data) {
-      if (self.isvalidJSON(data)) {
-        self.set('data', JSON.parse(data));
-        self.set('data.temperature', self.get('temperature') + Math.random() * 0.7);
-        self.set('data.humidity', self.get('humidity') + Math.random() * 0.7);
-        self.set('data.pressure', self.get('pressure') + Math.random() * 0.7);
-      }
+      console.log('data');
     });
+
+    // this.get('stream').write("{ \"command\": \"pressure\" }", function(err, results) {
+    //   console.log('err ' + err);
+    //   console.log('results ' + results);
+    // });
 
     this.get('stream').on('error', function (error) {
       Ember.Logger.warn('Error: ' + error);

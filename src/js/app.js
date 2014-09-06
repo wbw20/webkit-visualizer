@@ -45,13 +45,14 @@ App.BoardsIndexRoute = Ember.Route.extend({
 });
 
 App.BoardIndexRoute = Ember.Route.extend({
-  beforeModel: function() {
+  setupController: function(controller, model) {
+    controller.set('model', model);
     this.transitionTo('board.live');
   }
 })
 
 App.BoardLiveRoute = Ember.Route.extend({
-  controllerName: 'board'
+  controllerName: 'board'  
 });
 
 App.BoardGyroscopeRoute = Ember.Route.extend({
