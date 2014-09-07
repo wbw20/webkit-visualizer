@@ -17,6 +17,13 @@ App.BoardGyroscopeView = Ember.View.extend({
           wireframe: true
         });
 
+
+    var self = this;
+    var loader = new THREE.ColladaLoader();
+    loader.load('assets/models/apollo.dae', function (result) {
+      self.set('scene', result.scene);
+    });
+
     this.set('mesh', new THREE.Mesh( geometry, material ));
     this.get('scene').add(this.get('mesh'));
 
