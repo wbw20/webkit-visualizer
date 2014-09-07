@@ -15,6 +15,14 @@ App.BoardController = Ember.ObjectController.extend({
   flashMemory: 43,
   sdMemory: 21,
 
+  init: function() {
+    this.setupStream();
+  },
+
+  willDestroy: function() {
+    this.teardownStream();
+  },
+
   flashMemoryStyle: function() {
     return 'width: ' + this.get('flashMemory') + '%';
   }.property(),
@@ -47,7 +55,8 @@ App.BoardController = Ember.ObjectController.extend({
   },
 
   teardownStream: function() {
-    debugger
+    if (!this.get('stream')) { return; }
+
     this.get('stream').close();
     this.set('stream', null);
   },

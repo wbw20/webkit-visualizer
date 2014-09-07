@@ -6,8 +6,7 @@ App.BoardGyroscopeView = Ember.View.extend({
   accelerometerBinding: 'controller.data.accelerometer',
 
   didInsertElement: function() {
-    this.get('controller').setupStream();
-
+    this.get('controller').constantSample();
     this.set('scene', new THREE.Scene());
     this.set('camera', new THREE.PerspectiveCamera( 75, 1, 1, 10000 ));
     this.set('camera.position.z', 1000);
@@ -26,10 +25,6 @@ App.BoardGyroscopeView = Ember.View.extend({
 
     $('.gyroscope').append(this.get('renderer.domElement'));
     this.animate();
-  },
-
-  willDestroyElement: function(event) {
-    this.get('controller').teardownStream();
   },
 
   animate: function() {
