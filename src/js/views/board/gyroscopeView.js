@@ -7,31 +7,21 @@ App.BoardGyroscopeView = Ember.View.extend({
 
   didInsertElement: function() {
     this.get('controller').constantSample();
-    this.set('scene', new THREE.Scene());
-    this.set('camera', new THREE.PerspectiveCamera( 75, 1, 1, 10000 ));
-    this.set('camera.position.z', 1000);
-
-    var geometry = new THREE.BoxGeometry( 200, 200, 200 ),
-        material = new THREE.MeshBasicMaterial({
-          color: 0xff0000,
-          wireframe: true
-        });
-
 
     var self = this;
     var loader = new THREE.ColladaLoader();
     loader.load('assets/models/apollo.dae', function (result) {
+      self.set('camera', new THREE.PerspectiveCamera( 75, 1, 1, 10000 ));
+      self.set('camera.position.z', 1000);
+
       self.set('scene', result.scene);
+
+      self.set('renderer', new THREE.CanvasRenderer());
+      self.get('renderer').setSize(500, 500);
+
+      $('.gyroscope').append(self.get('renderer.domElement'));
+      self.animate();
     });
-
-    this.set('mesh', new THREE.Mesh( geometry, material ));
-    this.get('scene').add(this.get('mesh'));
-
-    this.set('renderer', new THREE.CanvasRenderer());
-    this.get('renderer').setSize(500, 500);
-
-    $('.gyroscope').append(this.get('renderer.domElement'));
-    this.animate();
   },
 
   animate: function() {
@@ -39,9 +29,9 @@ App.BoardGyroscopeView = Ember.View.extend({
     var render = function () {
       requestAnimationFrame(render);
 
-      self.set('mesh.rotation.x', self.get('accelerometer.x'));
-      self.set('mesh.rotation.y', self.get('accelerometer.y'));
-      self.set('mesh.rotation.z', self.get('accelerometer.z'));
+      // self.set('mesh.rotation.x', self.get('accelerometer.x'));
+      // self.set('mesh.rotation.y', self.get('accelerometer.y'));
+      // self.set('mesh.rotation.z', self.get('accelerometer.z'));
 
       self.get('renderer').render(self.get('scene'), self.get('camera'));
     };
