@@ -6,11 +6,11 @@ App.BoardController = Ember.ObjectController.extend({
       x: 0,
       y: 0,
       z: 0
-    }
+    },
+    temperature: 0,
+    humidity: 0,
+    pressure: 0,
   },
-  temperature: 30,
-  humidity: 70,
-  pressure: 5,
 
   flashMemory: 43,
   sdMemory: 21,
@@ -37,7 +37,10 @@ App.BoardController = Ember.ObjectController.extend({
       }
 
       self.get('stream').on('data', function (data) {
-        console.log(data.toString());
+        var string = data.toString();
+        if (self.isvalidJSON(string)) {
+          self.set('data', JSON.parse(data));
+        }
       });
     }); 
   },
