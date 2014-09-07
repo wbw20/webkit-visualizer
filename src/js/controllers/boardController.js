@@ -42,7 +42,7 @@ App.BoardController = Ember.ObjectController.extend({
           self.set('data', JSON.parse(data));
         }
       });
-    }); 
+    });
   },
 
   teardownStream: function() {
@@ -55,6 +55,15 @@ App.BoardController = Ember.ObjectController.extend({
    */
   write: function(object) {
     this.get('stream').write(JSON.stringify(object));
+  },
+
+  constantSample: function() {
+    Ember.run.later(this, function() {
+      this.write({
+        command: 'data'
+      });
+      this.constantSample();
+    }, 500);
   },
 
   isvalidJSON: function(str) {

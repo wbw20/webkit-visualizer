@@ -16,6 +16,7 @@ App.DataView = Ember.View.extend({
 
   didInsertElement: function() {
     this.get('controller').setupStream();
+    this.get('controller').constantSample();
     this.get('points').push(this.get('data'));
 
     this.set('chart', c3.generate({
