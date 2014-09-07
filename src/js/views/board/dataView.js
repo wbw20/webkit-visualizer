@@ -30,5 +30,9 @@ App.DataView = Ember.View.extend({
     }));
 
     $('.chart').append(this.get('chart').element);
-  }
+  },
+
+  willDestroyElement: function(event) {
+    this.get('controller').teardownStream();
+  },
 });
