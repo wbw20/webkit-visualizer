@@ -12,6 +12,9 @@ App.BoardGyroscopeView = Ember.View.extend({
     var loader = new THREE.ColladaLoader();
     loader.load('assets/models/apollo.dae', function (result) {
       self.set('figure', result.scene.children[0].clone());
+      self.get('figure').castShadow = true;
+      self.get('figure').receiveShadow = true;
+
       // self.set('camera', new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000 ));
       // self.get('camera').position.set( 0, 0, 150 );
 
@@ -24,6 +27,14 @@ App.BoardGyroscopeView = Ember.View.extend({
 
       self.set('renderer', new THREE.WebGLRenderer( { antialias: true } ));
       self.get('renderer').setSize(window.innerWidth, window.innerHeight);
+
+      self.get('renderer').setClearColor( self.get('scene').fog.color, 1 );
+
+      self.get('renderer').gammaInput = true;
+      self.get('renderer').gammaOutput = true;
+
+      self.get('renderer').shadowMapEnabled = true;
+      self.get('renderer').shadowMapCullFace = THREE.CullFaceBack;
 
       $('.gyroscope').append(self.get('renderer.domElement'));
       self.animate();
