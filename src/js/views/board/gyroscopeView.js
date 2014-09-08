@@ -45,6 +45,10 @@ App.BoardGyroscopeView = Ember.View.extend({
     var dirLight = new THREE.DirectionalLight( 0xffffff, 1 ),
         hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 
+    /* fog */
+    this.get('scene').fog = new THREE.Fog( 0xffffff, 1, 5000 );
+    this.get('scene').fog.color.setHSL( 0.6, 0, 1 );
+
     /* lights */
     hemiLight.color.setHSL( 0.6, 1, 0.6 );
     hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
@@ -90,15 +94,12 @@ App.BoardGyroscopeView = Ember.View.extend({
     var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
     var uniforms = {
       topColor:    { type: "c", value: new THREE.Color( 0x0077ff ) },
-      bottomColor: { type: "c", value: new THREE.Color( 0xffffff ) },
+      bottomColor: { type: "c", value: new THREE.Color( 0xd8eaff ) },
       offset:    { type: "f", value: 33 },
-      exponent:  { type: "f", value: 0.6 }
+      exponent:  { type: "f", value: 0.9 }
     }
     uniforms.topColor.value.copy( hemiLight.color );
 
-    /* fog */
-    this.get('scene').fog = new THREE.Fog( 0xffffff, 1, 5000 );
-    this.get('scene').fog.color.setHSL( 0.6, 0, 1 );
     this.get('scene').fog.color.copy( uniforms.bottomColor.value );
 
     var skyGeo = new THREE.SphereGeometry( 4000, 32, 15 );
