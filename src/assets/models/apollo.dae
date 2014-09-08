@@ -4,8 +4,8 @@
         <contributor>
             <authoring_tool>SketchUp 14.0.4899</authoring_tool>
         </contributor>
-        <created>2014-09-07T23:09:27Z</created>
-        <modified>2014-09-07T23:09:27Z</modified>
+        <created>2014-09-08T03:46:47Z</created>
+        <modified>2014-09-08T03:46:47Z</modified>
         <unit meter="0.0254000" name="inch" />
         <up_axis>Z_UP</up_axis>
     </asset>
@@ -141,7 +141,7 @@
         </geometry>
     </library_geometries>
     <library_materials>
-        <material id="ID3" name="Sophie_Skirt">
+        <material id="ID3" name="material_3">
             <instance_effect url="#ID4" />
         </material>
         <material id="ID17" name="material_1">
@@ -154,7 +154,7 @@
                 <technique sid="COMMON">
                     <lambert>
                         <diffuse>
-                            <color>0.0000000 0.0000000 0.0000000 1.0000000</color>
+                            <color>0.3176471 0.3176471 0.3176471 1.0000000</color>
                         </diffuse>
                     </lambert>
                 </technique>
