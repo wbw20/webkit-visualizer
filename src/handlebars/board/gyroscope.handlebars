@@ -1,8 +1,11 @@
 <div class="gyroscope">
 </div>
 
+<div class="compass">
+  {{view App.CompassView}}
+</div>
+
 <script type="x-shader/x-vertex" id="vertexShader">
-  debugger
   varying vec3 vWorldPosition;
 
   void main() {

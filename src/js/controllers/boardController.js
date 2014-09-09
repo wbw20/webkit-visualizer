@@ -74,7 +74,7 @@ App.BoardController = Ember.ObjectController.extend({
         command: 'data'
       });
       this.constantSample();
-    }, 500);
+    }, 100);
   },
 
   isvalidJSON: function(str) {
