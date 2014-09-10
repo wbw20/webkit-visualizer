@@ -12,8 +12,11 @@
   background-color: @gray_clearer;
 
   .glyphicon {
+    display: block;
+    text-align: center;
+    margin: @margin 0px;
+
     font-size: xx-large;
-    margin: @margin 0px 0px @margin;
     color: @light_gray;
 
     cursor: pointer;
@@ -25,10 +28,15 @@
 
   .board {
     display: none;
+
+    .glyphicon {
+      font-size: 20px;
+    }
   }
 
   .bottom {
     position: absolute;
+    width: 100%;
     bottom: 0px;
     margin-bottom: @margin;
   }

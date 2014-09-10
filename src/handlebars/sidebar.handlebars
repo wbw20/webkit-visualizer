@@ -1,25 +1,27 @@
 <div class="sidebar">
-  <div class="top">
+  <div class="home">
     {{#link-to 'boards'}}
       <span class="glyphicon glyphicon-home">
       </span>
     {{/link-to}}
+  </div>
+  <div class="top">
     {{#link-to 'world'}}
       <span class="glyphicon glyphicon-globe">
       </span>
     {{/link-to}}
   </div>
   <div class="board">
-    {{#link-to 'index'}}
-      <span class="glyphicon glyphicon-arrow-left">
+    {{#link-to "board.live"}}
+      <span class="glyphicon glyphicon-flash">
       </span>
     {{/link-to}}
-    {{#link-to 'world'}}
-      <span class="glyphicon glyphicon-signal">
+    {{#link-to "board.gyroscope"}}
+      <span class="glyphicon glyphicon-floppy-open">
       </span>
     {{/link-to}}
-    {{#link-to 'world'}}
-      <span class="glyphicon glyphicon-refresh">
+    {{#link-to "board.temperature"}}
+      <span class="glyphicon glyphicon-send">
       </span>
     {{/link-to}}
   </div>
