@@ -1,3 +1,16 @@
+
+/*
+ *
+ *  Sept. 9th 2014
+ *
+ *
+ *  This file is substantially below Carbon Origins
+ *  quality standards.  It should be refactored before
+ *  any more shit is stuffed into it.
+ *             -- Will
+ *
+ */
+
 App.BoardGyroscopeView = Ember.View.extend({
   scene: null,
   camera: null,
@@ -37,6 +50,14 @@ App.BoardGyroscopeView = Ember.View.extend({
       self.get('renderer').shadowMapCullFace = THREE.CullFaceBack;
 
       $('.gyroscope').append(self.get('renderer.domElement'));
+
+      $(window).resize(function() {
+        self.get('camera').aspect = window.innerWidth / window.innerHeight;
+        self.get('camera').updateProjectionMatrix();
+
+        self.get('renderer').setSize( window.innerWidth, window.innerHeight );
+      });
+
       self.animate();
     });
   },

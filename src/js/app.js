@@ -74,3 +74,49 @@ App.BoardHumidityRoute = Ember.Route.extend({
 App.BoardLiveRoute = Ember.Route.extend({
   controllerName: 'board'
 });
+
+/* TODO: legitimize this */
+
+function path() {
+  return App.__container__.lookup('router:main').location.lastSetURL;
+}
+
+function boardRoute() {
+  return path().match(/(live|temperature|gyroscope)/);
+}
+
+function topShowing() {
+  return $('.sidebar .top').first().css('display') === 'block';
+}
+
+function boardShowing() {
+  return $('.sidebar .board').first().css('display') === 'block';
+}
+
+var showTop = function() {
+  $('.sidebar .top').css('display', 'block');
+  $('.sidebar .board').css('display', 'none');
+}
+
+var showBoard = function() {
+  $('.sidebar .top').css('display', 'none');
+  $('.sidebar .board').css('display', 'block');
+}
+
+Ember.Router.reopen({
+  changeSidebar: function(one, two) {
+    if (boardRoute() && topShowing()) {
+      $('.top').animo({
+        animation: 'fadeOutLeft',
+        duration: 0.1
+      }, showBoard);
+    } else if (!boardRoute() && boardShowing()) {
+      $('.board').animo({
+        animation: 'fadeOutRight',
+        duration: 0.1
+      }, showTop);
+    }
+  }.on('didTransition')
+});
+
+/* END TODO */
