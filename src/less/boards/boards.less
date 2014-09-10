@@ -5,23 +5,20 @@ body .right_pane {
       text-align: center;
     }
 
-    @height: 200px;
-
     div.horizontal {
       overflow-x: scroll;
 
       ul {
-        height: 200px;
-        width: 1500px;
+        width: 2500px;
+        padding: 0px 0px 0px 100px;
+        margin-top: 140px;
 
         li {
-          width: 300px;
           display: inline-block;
 
           .container {
-            height: 180px;
-            width: 250px;
             margin: 10px auto;
+            border: 1px solid red;
             border-radius: 5px;
 
             color: @very_dark;
@@ -29,6 +26,18 @@ body .right_pane {
 
             h3 {
               margin-top: 0px;
+            }
+
+            .board {
+              height: 400px;
+              width: 500px;
+
+              svg {
+                fill: clear;
+
+                .hover-fill(@lighter_gray);
+                cursor: pointer;
+              }
             }
 
             .stoplight {
@@ -40,22 +49,6 @@ body .right_pane {
             }
           }
         }
-      }
-    }
-
-    ul.boards_list {
-      padding: 0px 0px 0px 100px;
-    }
-
-    .board {
-      height: 100px;
-      width: 200px;
-
-      svg {
-        fill: clear;
-
-        .hover-fill(@lighter_gray);
-        cursor: pointer;
       }
     }
   }
