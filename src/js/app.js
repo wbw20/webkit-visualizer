@@ -86,27 +86,27 @@ function boardRoute() {
 }
 
 function topShowing() {
-  return $('.sidebar .top').first().css('display') === 'block';
+  return $('.sidebar #top').first().css('display') === 'block';
 }
 
 function boardShowing() {
-  return $('.sidebar .board').first().css('display') === 'block';
+  return $('.sidebar #board').first().css('display') === 'block';
 }
 
 var showTop = function() {
-  $('.sidebar .top').css('display', 'block');
+  $('.sidebar #top').css('display', 'block');
   $('.sidebar .board').css('display', 'none');
 }
 
 var showBoard = function() {
-  $('.sidebar .top').css('display', 'none');
+  $('.sidebar #top').css('display', 'none');
   $('.sidebar .board').css('display', 'block');
 }
 
 Ember.Router.reopen({
   changeSidebar: function(one, two) {
     if (boardRoute() && topShowing()) {
-      $('.top').animo({
+      $('#top').animo({
         animation: 'fadeOutLeft',
         duration: 0.1
       }, showBoard);
