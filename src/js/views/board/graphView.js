@@ -1,4 +1,4 @@
-App.BoardTemperatureView = Ember.View.extend({
+App.BoardGraphView = Ember.View.extend({
   didInsertElement: function() {
     $(document).ready(function() {
       var tau = 6.283185307179586;

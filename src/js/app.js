@@ -22,7 +22,8 @@ App.Router.map(function() {
     this.route('luminosity');
     this.route('magnetometer');
     this.route('pressure');
-    this.route('temperature');
+
+    this.route('graph');
   });
 
   this.route('world');
@@ -59,7 +60,7 @@ App.BoardGyroscopeRoute = Ember.Route.extend({
   controllerName: 'board'
 });
 
-App.BoardTemperatureRoute = Ember.Route.extend({
+App.BoardGraphRoute = Ember.Route.extend({
   controllerName: 'board'
 });
 
@@ -82,7 +83,7 @@ function path() {
 }
 
 function boardRoute() {
-  return path().match(/(live|temperature|gyroscope)/);
+  return path().match(/(live|graph|gyroscope)/);
 }
 
 function topShowing() {
