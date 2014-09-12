@@ -24,7 +24,7 @@ App.BoardGraphView = Ember.View.extend({
         // Viewport camera/setup
         mathbox.viewport({
           type: 'cartesian',
-          range: [[-3, 3], [-2, 2], [-1, 1]],
+          range: [[-3, 3], [-3, 3], [-3, 3]],
           scale: [1, 1, 1],
         })
         .camera({
@@ -39,38 +39,64 @@ App.BoardGraphView = Ember.View.extend({
           id: 'a',
           axis: 0,
           color: 0xa0a0a0,
-          ticks: 5,
           lineWidth: 2,
           size: .05,
-          labels: true,
+          zero: false
         })
         .axis({
           id: 'b',
           axis: 1,
           color: 0xa0a0a0,
-          ticks: 5,
           lineWidth: 2,
           size: .05,
-          zero: false,
-          labels: true,
+          zero: false
         })
         .axis({
           id: 'c',
           axis: 2,
           color: 0xa0a0a0,
-          ticks: 5,
           lineWidth: 2,
           size: .05,
-          zero: false,
-          labels: true,
+          zero: false
         })
 
         // Grid
         .grid({
+          id: 'g',
           axis: [0, 2],
           color: 0xc0c0c0,
-          lineWidth: 1,
+          tickScale: [5, 5],
+          ticks: [ 5, 5],
+          // tickScale: [1, 1],
+          lineWidth: 1
         })
+
+        mathbox.vector({
+          n: 2,
+          data: [[0, 0, 0], [1, 1, 1], [-1, -1, -1], [0, 1, .5]],
+        });
+
+        setTimeout(function() {
+          mathbox.animate('viewport', {
+            range: [[-30, 30], [-2, 2], [-1, 1]],
+          }, { duration: 1500 });
+
+          mathbox.animate('viewport', {
+            scale: [10, 1, 1],
+          }, { duration: 1500 });
+        }, 3000);
+
+        setTimeout(function() {
+          mathbox.remove('#g');
+          mathbox.grid({
+            id: 'g',
+            axis: [0, 2],
+            color: 0xc0c0c0,
+            tickScale: [50, 5],
+            ticks: [ 50, 5],
+            lineWidth: 1
+          });
+        }, 5000);
       });
     });
   }
