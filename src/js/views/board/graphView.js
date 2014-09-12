@@ -1,5 +1,7 @@
 App.BoardGraphView = Ember.View.extend({
   didInsertElement: function() {
+    var self = this;
+
     $(document).ready(function() {
       var tau = 6.283185307179586;
 
@@ -24,11 +26,11 @@ App.BoardGraphView = Ember.View.extend({
         // Viewport camera/setup
         mathbox.viewport({
           type: 'cartesian',
-          range: [[-3, 3], [-3, 3], [-3, 3]],
-          scale: [1, 1, 1],
+          range: [[-1, 1], [-1, 1], [-1, 1]],
+          scale: [2, 2, 2],
         })
         .camera({
-          orbit: 3.5,
+          orbit: 10,
           phi: tau/6,
           theta: 0.3,
         })
@@ -65,9 +67,8 @@ App.BoardGraphView = Ember.View.extend({
           id: 'g',
           axis: [0, 2],
           color: 0xc0c0c0,
-          tickScale: [5, 5],
-          ticks: [ 5, 5],
-          // tickScale: [1, 1],
+          tickScale: [2, 2],
+          ticks: [ 2, 2],
           lineWidth: 1
         })
 
@@ -77,27 +78,42 @@ App.BoardGraphView = Ember.View.extend({
         });
 
         setTimeout(function() {
-          mathbox.animate('viewport', {
-            range: [[-6, 3], [-3, 3], [-3, 3]],
-          }, { duration: 400 });
-
-          mathbox.animate('viewport', {
-            scale: [1.5, 1, 1],
-          }, { duration: 400 });
+          self.resetDomain([-1, 5], [-1, 1], [-1, 1]);
         }, 3000);
-
-        setTimeout(function() {
-          mathbox.remove('#g');
-          mathbox.grid({
-            id: 'g',
-            axis: [0, 2],
-            color: 0xc0c0c0,
-            tickScale: [8, 5],
-            ticks: [ 8, 5],
-            lineWidth: 1
-          });
-        }, 3500);
       });
     });
+  },
+
+  /*
+   *  Multiply the domain of this graph
+   */
+  resetDomain: function(x, y, z) {
+    var viewport = mathbox.get('viewport'),
+        range = viewport.range,
+        scale = viewport.scale;
+
+    var xExtent = Math.abs(x[0]) + x[1],
+        yExtent = Math.abs(y[0]) + y[1],
+        zExtent = Math.abs(z[0]) + z[1];
+
+    mathbox.animate('viewport', {
+      range: [x, y, z],
+    }, { duration: 400 });
+
+    mathbox.animate('viewport', {
+      scale: [xExtent, yExtent, zExtent],
+    }, { duration: 400 });
+
+    setTimeout(function() {
+      mathbox.remove('#g');
+      mathbox.grid({
+        id: 'g',
+        axis: [0, 2],
+        color: 0xc0c0c0,
+        tickScale: [xExtent, zExtent],
+        ticks: [xExtent, zExtent],
+        lineWidth: 1
+      });
+    }, 500);
   }
 });
