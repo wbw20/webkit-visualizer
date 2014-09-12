@@ -6,7 +6,9 @@ App.BoardTemperatureView = Ember.View.extend({
       ThreeBox.preload([
         'assets/shaders/snippets.glsl.html',
       ], function () {
-        var mathbox = window.mathbox = mathBox({
+        var el = document.getElementById('graph');
+        var mathbox = window.mathbox = mathBox(el, {
+          alpha:          true,
           cameraControls: true,
           cursor:         true,
           controlClass:   ThreeBox.OrbitControls,
@@ -16,6 +18,8 @@ App.BoardTemperatureView = Ember.View.extend({
           stats:          false,
           scale:          1,
         }).start();
+
+        mathbox.world().tRenderer().setClearColorHex(0x000000, 0);
 
         // Viewport camera/setup
         mathbox
