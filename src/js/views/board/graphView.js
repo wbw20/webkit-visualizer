@@ -80,6 +80,10 @@ App.BoardGraphView = Ember.View.extend({
         setTimeout(function() {
           self.resetDomain([-1, 5], [-1, 1], [-1, 1]);
         }, 3000);
+
+        setTimeout(function() {
+          self.resetDomain([-1, 5], [-1, 1], [-10, 10]);
+        }, 5000);
       });
     });
   },
