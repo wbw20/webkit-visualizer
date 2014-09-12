@@ -77,24 +77,23 @@ App.BoardGraphView = Ember.View.extend({
         });
 
         setTimeout(function() {
-          mathbox.remove('#g');
-
           mathbox.animate('viewport', {
-            range: [[-30, 30], [-3, 3], [-3, 3]],
+            range: [[-6, 3], [-3, 3], [-3, 3]],
           }, { duration: 1500 });
 
           mathbox.animate('viewport', {
-            scale: [10, 1, 1],
+            scale: [1.5, 1, 1],
           }, { duration: 1500 });
         }, 3000);
 
         setTimeout(function() {
+          mathbox.remove('#g');
           mathbox.grid({
             id: 'g',
             axis: [0, 2],
             color: 0xc0c0c0,
-            tickScale: [50, 5],
-            ticks: [ 50, 5],
+            tickScale: [8, 5],
+            ticks: [ 8, 5],
             lineWidth: 1
           });
         }, 5000);
