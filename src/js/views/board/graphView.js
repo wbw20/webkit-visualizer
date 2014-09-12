@@ -79,11 +79,11 @@ App.BoardGraphView = Ember.View.extend({
         setTimeout(function() {
           mathbox.animate('viewport', {
             range: [[-6, 3], [-3, 3], [-3, 3]],
-          }, { duration: 1500 });
+          }, { duration: 400 });
 
           mathbox.animate('viewport', {
             scale: [1.5, 1, 1],
-          }, { duration: 1500 });
+          }, { duration: 400 });
         }, 3000);
 
         setTimeout(function() {
@@ -96,7 +96,7 @@ App.BoardGraphView = Ember.View.extend({
             ticks: [ 8, 5],
             lineWidth: 1
           });
-        }, 5000);
+        }, 3500);
       });
     });
   }
