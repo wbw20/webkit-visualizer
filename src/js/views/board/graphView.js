@@ -1,5 +1,6 @@
 App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
+  mathbox: null,
 
   didInsertElement: function() {
     var self = this;
@@ -8,7 +9,7 @@ App.BoardGraphView = Ember.View.extend({
       'assets/shaders/snippets.glsl.html',
     ], function () {
       var el = document.getElementById('graph');
-      var mathbox = window.mathbox = mathBox(el, {
+      self.set('mathbox', mathBox(el, {
         alpha:          true,
         cameraControls: true,
         cursor:         true,
@@ -18,12 +19,14 @@ App.BoardGraphView = Ember.View.extend({
         screenshot:     true,
         stats:          false,
         scale:          1,
-      }).start();
+      }));
 
-      mathbox.world().tRenderer().setClearColorHex(0x000000, 0);
+      self.get('mathbox').start();
+
+      self.get('mathbox').world().tRenderer().setClearColorHex(0x000000, 0);
 
       // Viewport camera/setup
-      mathbox.viewport({
+      self.get('mathbox').viewport({
         type: 'cartesian',
         range: [[-1, 1], [-1, 1], [-1, 1]],
         scale: [2, 2, 2],
@@ -71,7 +74,7 @@ App.BoardGraphView = Ember.View.extend({
         lineWidth: 1
       })
 
-      mathbox.vector({
+      self.get('mathbox').vector({
         n: 2,
         data: [[0, 0, 0], [1, 1, 1], [-1, -1, -1], [0, 1, .5]],
       });
@@ -91,7 +94,7 @@ App.BoardGraphView = Ember.View.extend({
    *  Multiply the domain of this graph
    */
   resetDomain: function(x, y, z) {
-    var viewport = mathbox.get('viewport'),
+    var viewport = this.get('mathbox').get('viewport'),
         range = viewport.range,
         scale = viewport.scale;
 
@@ -99,17 +102,18 @@ App.BoardGraphView = Ember.View.extend({
         yExtent = Math.abs(y[0]) + y[1],
         zExtent = Math.abs(z[0]) + z[1];
 
-    mathbox.animate('viewport', {
+    this.get('mathbox').animate('viewport', {
       range: [x, y, z],
     }, { duration: 400 });
 
-    mathbox.animate('viewport', {
+    this.get('mathbox').animate('viewport', {
       scale: [xExtent, yExtent, zExtent],
     }, { duration: 400 });
 
+    var self = this;
     setTimeout(function() {
-      mathbox.remove('#g');
-      mathbox.grid({
+      self.get('mathbox').remove('#g');
+      self.get('mathbox').grid({
         id: 'g',
         axis: [0, 2],
         color: 0xc0c0c0,
