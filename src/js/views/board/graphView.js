@@ -149,7 +149,7 @@ App.BoardGraphView = Ember.View.extend({
     }, { duration: 400 });
 
     this.get('mathbox').animate('camera', {
-      orbit: xExtent + yExtent + zExtent,
+      orbit: (xExtent + yExtent + zExtent)*2,
     }, { duration: 400 });
 
     var self = this;
