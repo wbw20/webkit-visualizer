@@ -74,15 +74,9 @@ App.BoardGraphView = Ember.View.extend({
         lineWidth: 1
       });
 
-      self.addPoint([0.5, 0.5, 0.5]);
-
       setTimeout(function() {
-        self.resetDomain([-1, 5], [-1, 1], [-1, 1]);
+        self.addPoint([3, 3, 3], 0x00ff00);
       }, 3000);
-
-      setTimeout(function() {
-        self.resetDomain([-1, 5], [-1, 1], [-10, 10]);
-      }, 5000);
     });
   },
 
@@ -92,31 +86,48 @@ App.BoardGraphView = Ember.View.extend({
   addPoint: function(location, color) {
     if (!location) { return; }
 
-    this.get('mathbox').curve({
-      id: 'point',
-      n: 1,
-      data: [location],
-      pointSize: 15,
-      color: color || 0x000000,
-      points: true,
-      line: false,
-    });
+    var currentRange = this.get('mathbox').get('viewport').range,
+        largerRange = currentRange,
+        larger = false;
+
+    if (currentRange[0][0] > location[0]) { larger = true; largerRange[0][0] = location[0] - 5; }
+    if (currentRange[0][1] < location[0]) { larger = true; largerRange[0][1] = location[0] + 5; }
+    if (currentRange[1][0] > location[1]) { larger = true; largerRange[1][0] = location[1] - 5; }
+    if (currentRange[1][1] < location[1]) { larger = true; largerRange[1][1] = location[1] + 5; }
+    if (currentRange[2][0] > location[2]) { larger = true; largerRange[2][0] = location[2] - 5; }
+    if (currentRange[2][1] < location[2]) { larger = true; largerRange[2][1] = location[2] + 5; }
+
+    if (larger) {
+      var self = this;
+
+      this.resetDomain(largerRange, function() {
+        self.get('mathbox').curve({
+          id: 'point',
+          n: 1,
+          data: [location],
+          pointSize: 15,
+          color: color || 0x000000,
+          points: true,
+          line: false,
+        });
+      });
+    }
   },
 
   /*
    *  Multiply the domain of this graph
    */
-  resetDomain: function(x, y, z) {
+  resetDomain: function(domain, cb) {
     var viewport = this.get('mathbox').get('viewport'),
         range = viewport.range,
         scale = viewport.scale;
 
-    var xExtent = Math.abs(x[0]) + x[1],
-        yExtent = Math.abs(y[0]) + y[1],
-        zExtent = Math.abs(z[0]) + z[1];
+    var xExtent = Math.abs(domain[0][0]) + domain[0][1],
+        yExtent = Math.abs(domain[1][0]) + domain[1][1],
+        zExtent = Math.abs(domain[2][0]) + domain[2][1];
 
     this.get('mathbox').animate('viewport', {
-      range: [x, y, z],
+      range: domain,
     }, { duration: 400 });
 
     this.get('mathbox').animate('viewport', {
@@ -134,6 +145,8 @@ App.BoardGraphView = Ember.View.extend({
         ticks: [xExtent, zExtent],
         lineWidth: 1
       });
+
+      if (cb) { cb(); }
     }, 500);
   }
 });
