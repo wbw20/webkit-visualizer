@@ -32,7 +32,6 @@ App.BoardController = Ember.ObjectController.extend({
   }.property(),
 
   setupStream: function() {
-    debugger
     if (!this.get('model.comName')) { return; }
 
     var self = this;

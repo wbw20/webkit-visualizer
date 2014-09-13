@@ -80,7 +80,6 @@ App.BoardGraphView = Ember.View.extend({
   },
 
   onData: function(value) {
-    debugger
     if (!this.get('mathbox')) { return; }
     this.addPoint([value.data.temperature, 0, 0], 0xff0000);
   }.observes('data.temperature'),
