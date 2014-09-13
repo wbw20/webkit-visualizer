@@ -72,12 +72,9 @@ App.BoardGraphView = Ember.View.extend({
         tickScale: [2, 2],
         ticks: [ 2, 2],
         lineWidth: 1
-      })
-
-      self.get('mathbox').vector({
-        n: 2,
-        data: [[0, 0, 0], [1, 1, 1], [-1, -1, -1], [0, 1, .5]],
       });
+
+      self.addPoint([0.5, 0.5, 0.5]);
 
       setTimeout(function() {
         self.resetDomain([-1, 5], [-1, 1], [-1, 1]);
@@ -87,7 +84,23 @@ App.BoardGraphView = Ember.View.extend({
         self.resetDomain([-1, 5], [-1, 1], [-10, 10]);
       }, 5000);
     });
+  },
 
+  /*
+   *  Add a point to the current display
+   */
+  addPoint: function(location, color) {
+    if (!location) { return; }
+
+    this.get('mathbox').curve({
+      id: 'point',
+      n: 1,
+      data: [location],
+      pointSize: 15,
+      color: color || 0x000000,
+      points: true,
+      line: false,
+    });
   },
 
   /*
