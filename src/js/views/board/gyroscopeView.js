@@ -68,14 +68,14 @@ App.BoardGyroscopeView = Ember.View.extend({
 
     /* fog */
     this.get('scene').fog = new THREE.Fog( 0xffffff, 1, 5000 );
-    this.get('scene').fog.color.setHSL( 0.6, 0, 1 );
+    // this.get('scene').fog.color.setHSL( 0.6, 0, 1 );
 
     /* lights */
-    hemiLight.color.setHSL( 0.6, 1, 0.6 );
-    hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
+    // hemiLight.color.setHSL( 0.6, 1, 0.6 );
+    // hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
     hemiLight.position.set( 0, 500, 0 );
 
-    dirLight.color.setHSL( 0.1, 1, 0.95 );
+    // dirLight.color.setHSL( 0.1, 1, 0.95 );
     dirLight.position.set( -1, 1.75, 1 );
     dirLight.position.multiplyScalar( 50 );
 
@@ -100,8 +100,8 @@ App.BoardGyroscopeView = Ember.View.extend({
 
     /* ground */
     var groundGeo = new THREE.PlaneGeometry( 10000, 10000 );
-    var groundMat = new THREE.MeshPhongMaterial( { ambient: 0xffffff, color: 0xffffff, specular: 0x050505 } );
-    groundMat.color.setHSL( 0.095, 1, 0.75 );
+    var groundMat = new THREE.MeshPhongMaterial( { ambient: 0xffffff, color: 0xe3813b, specular: 0x050505 } );
+    // groundMat.color.setHSL( 0.095, 1, 0.75 );
 
     var ground = new THREE.Mesh( groundGeo, groundMat );
     ground.rotation.x = -Math.PI/2;

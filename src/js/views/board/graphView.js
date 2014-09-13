@@ -1,6 +1,7 @@
 App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
   mathbox: null,
+  dataBinding: 'controller.data',
 
   didInsertElement: function() {
     var self = this;
@@ -74,19 +75,15 @@ App.BoardGraphView = Ember.View.extend({
         lineWidth: 1
       });
 
-      setTimeout(function() {
-        self.addPoint([3, 3, 3], 0xff0000);
-      }, 3000);
-
-      setTimeout(function() {
-        self.addPoint([10, 3, 3], 0x00ff00);
-      }, 4000);
-
-      setTimeout(function() {
-        self.addPoint([8, 7, 3], 0x0000ff);
-      }, 5000);
+      self.get('controller').constantSample();
     });
   },
+
+  onData: function(value) {
+    debugger
+    if (!this.get('mathbox')) { return; }
+    this.addPoint([value.data.temperature, 0, 0], 0xff0000);
+  }.observes('data.temperature'),
 
   /*
    *  Add a point to the current display
