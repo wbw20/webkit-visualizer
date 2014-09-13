@@ -75,8 +75,16 @@ App.BoardGraphView = Ember.View.extend({
       });
 
       setTimeout(function() {
-        self.addPoint([3, 3, 3], 0x00ff00);
+        self.addPoint([3, 3, 3], 0xff0000);
       }, 3000);
+
+      setTimeout(function() {
+        self.addPoint([10, 3, 3], 0x00ff00);
+      }, 4000);
+
+      setTimeout(function() {
+        self.addPoint([8, 7, 3], 0x0000ff);
+      }, 5000);
     });
   },
 
@@ -111,6 +119,16 @@ App.BoardGraphView = Ember.View.extend({
           line: false,
         });
       });
+    } else {
+      this.get('mathbox').curve({
+        id: 'point',
+        n: 1,
+        data: [location],
+        pointSize: 15,
+        color: color || 0x000000,
+        points: true,
+        line: false,
+      });
     }
   },
 
@@ -132,6 +150,10 @@ App.BoardGraphView = Ember.View.extend({
 
     this.get('mathbox').animate('viewport', {
       scale: [xExtent, yExtent, zExtent],
+    }, { duration: 400 });
+
+    this.get('mathbox').animate('camera', {
+      orbit: xExtent + yExtent + zExtent,
     }, { duration: 400 });
 
     var self = this;
