@@ -79,10 +79,10 @@ App.BoardGraphView = Ember.View.extend({
     });
   },
 
-  onData: function(value) {
-    if (!this.get('mathbox')) { return; }
-    this.addPoint([value.data.temperature, 0, 0], 0xff0000);
-  }.observes('data.temperature'),
+  // onData: function(value) {
+  //   if (!this.get('mathbox')) { return; }
+  //   this.addPoint([value.data.temperature, 0, 0], 0xff0000);
+  // }.observes('data.temperature'),
 
   /*
    *  Add a point to the current display
