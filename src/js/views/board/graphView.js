@@ -1,7 +1,6 @@
 App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
   mathbox: null,
-  axes: [],
   dataBinding: 'controller.data',
 
   didInsertElement: function() {
@@ -42,7 +41,7 @@ App.BoardGraphView = Ember.View.extend({
 
       // Axes
       .axis({
-        id: 'a',
+        id: 'x',
         axis: 0,
         color: 0xa0a0a0,
         lineWidth: 2,
@@ -50,7 +49,7 @@ App.BoardGraphView = Ember.View.extend({
         zero: false
       })
       .axis({
-        id: 'b',
+        id: 'y',
         axis: 1,
         color: 0xa0a0a0,
         lineWidth: 2,
@@ -58,7 +57,7 @@ App.BoardGraphView = Ember.View.extend({
         zero: false
       })
       .axis({
-        id: 'c',
+        id: 'z',
         axis: 2,
         color: 0xa0a0a0,
         lineWidth: 2,
@@ -75,12 +74,6 @@ App.BoardGraphView = Ember.View.extend({
         ticks: [ 2, 2],
         lineWidth: 1
       });
-
-      var axes = [];
-      axes.push(self.drawLine([-100, 0, 0], [100, 0, 0], 0xff0000));
-      axes.push(self.drawLine([0, -100, 0], [0, 100, 0], 0x00ff00));
-      axes.push(self.drawLine([0, 0, -100], [0, 0, 100], 0x0000ff));
-      self.set('axes', axes);
 
       self.get('controller').constantSample();
 
@@ -132,7 +125,6 @@ App.BoardGraphView = Ember.View.extend({
    *    });
    */
   distance: function(ray, vector) {
-    debugger
     var directional,
         separational,
         distance1,
@@ -266,7 +258,19 @@ App.BoardGraphView = Ember.View.extend({
     });
 
     if (distance < 0.3) {
-      console.log('close');
+      if (this.get('mathbox').get('#x').style.lineWidth == 2) {
+        this.get('mathbox').animate('#x', {
+          lineWidth: 5,
+          color: 0xff0000
+        }, { duration: 100 });
+      }
+    } else {
+      if (this.get('mathbox').get('#x').style.lineWidth == 5) {
+        this.get('mathbox').animate('#x', {
+          lineWidth: 2,
+          color: 0xa0a0a0
+        }, { duration: 100 });
+      }
     }
   },
 
