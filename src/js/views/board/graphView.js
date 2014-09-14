@@ -1,5 +1,6 @@
 App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
+  dragDistance: 0.2,
   mathbox: null,
   dataBinding: 'controller.data',
 
@@ -252,26 +253,43 @@ App.BoardGraphView = Ember.View.extend({
         numFaces = 0,
         intersections;
 
-    var distance = this.distance(raycaster.ray, {
-      slope: [1, 0, 0],
-      offset: [0, 0, 0]
-    });
+    var axes = [{
+      tag: '#x',
+      distance: this.distance(raycaster.ray, {
+        slope: [1, 0, 0],
+        offset: [0, 0, 0]
+      })
+    }, {
+      tag: '#y',
+      distance: this.distance(raycaster.ray, {
+        slope: [0, 1, 0],
+        offset: [0, 0, 0]
+      })
+    }, {
+      tag: '#z',
+      distance: this.distance(raycaster.ray, {
+        slope: [0, 0, 1],
+        offset: [0, 0, 0]
+      })
+    }];
 
-    if (distance < 0.3) {
-      if (this.get('mathbox').get('#x').style.lineWidth == 2) {
-        this.get('mathbox').animate('#x', {
-          lineWidth: 5,
-          color: 0xff0000
-        }, { duration: 100 });
-      }
-    } else {
-      if (this.get('mathbox').get('#x').style.lineWidth == 5) {
-        this.get('mathbox').animate('#x', {
-          lineWidth: 2,
-          color: 0xa0a0a0
-        }, { duration: 100 });
-      }
+    var min = _.min(axes, function(axis) { return axis.distance; });
+
+    if (min.distance < this.dragDistance) {
+      this.get('mathbox').animate(min.tag, {
+        lineWidth: 5,
+        color: 0xff0000
+      }, { duration: 100 });
     }
+
+      // if (this.get('mathbox').get('#x').style.lineWidth == 2) {
+      // }
+      // if (this.get('mathbox').get('#x').style.lineWidth == 5) {
+      //   this.get('mathbox').animate('#x', {
+      //     lineWidth: 2,
+      //     color: 0xa0a0a0
+      //   }, { duration: 100 });
+      // }
   },
 
   /*
