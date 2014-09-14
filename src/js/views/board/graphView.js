@@ -76,6 +76,12 @@ App.BoardGraphView = Ember.View.extend({
       });
 
       self.get('controller').constantSample();
+
+      // el.addEventListener('mousemove', function(event) {
+      //   self.onDocumentMouseMove(event);
+      // }, false);
+
+      self.drawLine();
     });
   },
 
@@ -83,6 +89,96 @@ App.BoardGraphView = Ember.View.extend({
   //   if (!this.get('mathbox')) { return; }
   //   this.addPoint([value.data.temperature, 0, 0], 0xff0000);
   // }.observes('data.temperature'),
+
+  dragEnd: function(event) {
+    alert(event);
+  },
+
+  drawLine: function() {
+    var scene = this.get('mathbox').world().tScene();
+
+    var material,
+        geometry,
+        line;
+
+    material = new THREE.LineBasicMaterial({
+        color: 0x0000ff
+    });
+
+    geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+    geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+
+    line = new THREE.Line(geometry, material);
+    scene.add(line);
+  },
+
+  onDocumentMouseMove: function(event) {
+    event.preventDefault();
+
+    var mouse = new THREE.Vector2(),
+        projector = new THREE.Projector(),
+        camera = this.get('mathbox').world().tCamera();
+
+    var objects = [],
+        objectsSearch = [],
+        totalFaces = 0,
+        intersected;
+
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+    var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+    projector.unprojectVector( vector, camera );
+
+    /* LOL */
+    vector.sub = function(v) {
+      this.x -= v.x;
+      this.y -= v.y;
+
+      return this;
+    };
+
+    var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+    var octreeObjects,
+        numObjects,
+        numFaces = 0,
+        intersections;
+    
+    // if ( useOctree ) {
+    //   octreeObjects = octree.search( raycaster.ray.origin, raycaster.ray.far, true, raycaster.ray.direction );
+    //   intersections = raycaster.intersectOctreeObjects( octreeObjects );
+    //   numObjects = octreeObjects.length;
+
+    //   for ( var i = 0, il = numObjects; i < il; i++ ) {
+    //     numFaces += octreeObjects[ i ].faces.length;
+    //   }
+    // } else {
+      intersections = raycaster.intersectObjects(this.get('mathbox').primitives);
+      numObjects = objects.length;
+      numFaces = totalFaces;
+    // }
+
+    if ( intersections.length > 0 ) {
+      if ( intersected != intersections[ 0 ].object ) {
+        if ( intersected ) {
+          intersected.material.color.setHex( baseColor );
+        }
+
+        intersected = intersections[ 0 ].object;
+        intersected.material.color.setHex( intersectColor );
+      }
+
+      document.body.style.cursor = 'pointer';
+    } else if ( intersected ) {
+      intersected.material.color.setHex( baseColor );
+      intersected = null;
+
+      document.body.style.cursor = 'auto';
+    }
+
+    console.log(intersections.length);
+  },
 
   /*
    *  Add a point to the current display

@@ -1,5 +1,8 @@
 App.VectorView = Ember.View.extend({
-  vectorBinding: null,
+  vector: null,
+  name: null,
+
+  templateName: 'board.graph.vector',
   classNames: ['vector'],
   draggable: 'true',
   attributeBindings: ['draggable'],
