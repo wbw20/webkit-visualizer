@@ -273,23 +273,25 @@ App.BoardGraphView = Ember.View.extend({
       })
     }];
 
+    var self = this;
+
+    /* Reset non-hovered axes */
+    axes.forEach(function(axis) {
+      if (axis.distance > self.dragDistance && self.get('mathbox').get(axis.tag).style.lineWidth == 5) {
+        self.get('mathbox').set(axis.tag, { color: 0xa0a0a0, lineWidth: 2 });
+      }
+    });
+
+    /* Find currently hovered axis */
     var min = _.min(axes, function(axis) { return axis.distance; });
 
-    if (min.distance < this.dragDistance) {
+    /* Color that axis if it is close enough */
+    if (min.distance < this.dragDistance && this.get('mathbox').get(min.tag).style.lineWidth == 2) {
       this.get('mathbox').animate(min.tag, {
         lineWidth: 5,
         color: 0xff0000
       }, { duration: 100 });
     }
-
-      // if (this.get('mathbox').get('#x').style.lineWidth == 2) {
-      // }
-      // if (this.get('mathbox').get('#x').style.lineWidth == 5) {
-      //   this.get('mathbox').animate('#x', {
-      //     lineWidth: 2,
-      //     color: 0xa0a0a0
-      //   }, { duration: 100 });
-      // }
   },
 
   /*
