@@ -1,6 +1,7 @@
 App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
   mathbox: null,
+  axes: [],
   dataBinding: 'controller.data',
 
   didInsertElement: function() {
@@ -75,13 +76,17 @@ App.BoardGraphView = Ember.View.extend({
         lineWidth: 1
       });
 
+      var axes = [];
+      axes.push(self.drawLine([-100, 0, 0], [100, 0, 0], 0xff0000));
+      axes.push(self.drawLine([0, -100, 0], [0, 100, 0], 0x00ff00));
+      axes.push(self.drawLine([0, 0, -100], [0, 0, 100], 0x0000ff));
+      self.set('axes', axes);
+
       self.get('controller').constantSample();
 
-      // el.addEventListener('mousemove', function(event) {
-      //   self.onDocumentMouseMove(event);
-      // }, false);
-
-      self.drawLine();
+      el.addEventListener('mousemove', function(event) {
+        self.onDocumentMouseMove(event);
+      }, false);
     });
   },
 
@@ -94,7 +99,7 @@ App.BoardGraphView = Ember.View.extend({
     alert(event);
   },
 
-  drawLine: function() {
+  drawLine: function(start, end, color) {
     var scene = this.get('mathbox').world().tScene();
 
     var material,
@@ -102,22 +107,131 @@ App.BoardGraphView = Ember.View.extend({
         line;
 
     material = new THREE.LineBasicMaterial({
-        color: 0x0000ff
+        color: color
     });
 
     geometry = new THREE.Geometry();
-    geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
-    geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+    geometry.vertices.push(new THREE.Vector3(start[0], start[1], start[2]));
+    geometry.vertices.push(new THREE.Vector3(end[0], end[1], end[2]));
 
     line = new THREE.Line(geometry, material);
     scene.add(line);
+
+    return line;
+  },
+
+  /*
+   *  Return the closest distance between a THREE.js Ray and a vector
+   *
+   *
+   *  Example:
+   *
+   *    intersect(ray, {
+   *      slope: [2, 0, 10],
+   *      offset: [-10, 2, -9]
+   *    });
+   */
+  distance: function(ray, vector) {
+    debugger
+    var directional,
+        separational,
+        distance1,
+        distance2,
+        point1,
+        point2;
+
+    var raySlope = [ray.direction.x, ray.direction.y, ray.direction.z],
+        rayOffset = [ray.origin.x, ray.origin.y, ray.origin.z];
+
+    directional = this.dot(raySlope, vector.slope);
+
+    /* are they parallel? */
+    if (directional == 1) {
+      return false;
+    }
+
+    separational = this.separationProjections({
+      slope: raySlope,
+      offset: rayOffset
+    }, vector);
+
+    distance1 = ((separational[0] - (directional*separational[1])) / (1 - directional*directional)),
+    distance2 = ((separational[1] - (directional*separational[0])) / (directional*directional - 1));
+
+    point1 = this.add(rayOffset, this.scale(raySlope, distance1)),
+    point2 = this.add(vector.offset, this.scale(vector.slope, distance2));
+
+    return this._distance(point1, point2);
+  },
+
+  /*
+   *  Distance between two points in 3-space
+   */
+  _distance: function(point1, point2) {
+    var x = point2[0] - point1[0],
+        y = point2[1] - point1[1],
+        z = point2[2] - point1[2];
+
+    return Math.sqrt(x*x + y*y + z*z);
+  },
+
+  /*
+   *  Example:
+   *
+   *    separationProjections({
+   *      slope: [0, 1, 1],
+   *      offset: [-1, 4, 0]
+   *    }, {
+   *      slope: [2, 0, 10],
+   *      offset: [-10, 2, -9]
+   *    });
+   */
+  separationProjections: function(vector1, vector2) {
+    var difference = this.subtract(vector2.offset, vector1.offset);
+
+    return [this.dot(difference, vector1.slope),
+            this.dot(difference, vector2.slope)];
+  },
+
+  /*
+   *  Vector addition
+   */
+  add: function(vector1, vector2) {
+    return [vector1[0] + vector2[0],
+            vector1[1] + vector2[1],
+            vector1[2] + vector2[2]];
+  },
+
+  /*
+   *  Vector subtraction
+   */
+  subtract: function(vector1, vector2) {
+    return [vector1[0] - vector2[0],
+            vector1[1] - vector2[1],
+            vector1[2] - vector2[2]];
+  },
+
+  /*
+   *  Scale a vector by a scalar
+   */
+  scale: function(vector, scalar) {
+    return [vector[0]*scalar, vector[1]*scalar, vector[2]*scalar]
+  },
+
+  /*
+   *  Vector dot product
+   */
+  dot: function(vector1, vector2) {
+    return vector1[0]*vector2[0] + vector1[1]*vector2[1] + vector1[2]*vector2[2];
   },
 
   onDocumentMouseMove: function(event) {
     event.preventDefault();
 
-    var mouse = new THREE.Vector2(),
-        projector = new THREE.Projector(),
+    var mouseX,
+        mouseY;
+
+    var projector = new THREE.Projector(),
         camera = this.get('mathbox').world().tCamera();
 
     var objects = [],
@@ -125,16 +239,17 @@ App.BoardGraphView = Ember.View.extend({
         totalFaces = 0,
         intersected;
 
-    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
-    projector.unprojectVector( vector, camera );
+    var vector = new THREE.Vector3(mouseX, mouseY, camera.near);
+    projector.unprojectVector(vector, camera);
 
     /* LOL */
     vector.sub = function(v) {
       this.x -= v.x;
       this.y -= v.y;
+      this.z -= v.z;
 
       return this;
     };
@@ -144,40 +259,15 @@ App.BoardGraphView = Ember.View.extend({
         numObjects,
         numFaces = 0,
         intersections;
-    
-    // if ( useOctree ) {
-    //   octreeObjects = octree.search( raycaster.ray.origin, raycaster.ray.far, true, raycaster.ray.direction );
-    //   intersections = raycaster.intersectOctreeObjects( octreeObjects );
-    //   numObjects = octreeObjects.length;
 
-    //   for ( var i = 0, il = numObjects; i < il; i++ ) {
-    //     numFaces += octreeObjects[ i ].faces.length;
-    //   }
-    // } else {
-      intersections = raycaster.intersectObjects(this.get('mathbox').primitives);
-      numObjects = objects.length;
-      numFaces = totalFaces;
-    // }
+    var distance = this.distance(raycaster.ray, {
+      slope: [1, 0, 0],
+      offset: [0, 0, 0]
+    });
 
-    if ( intersections.length > 0 ) {
-      if ( intersected != intersections[ 0 ].object ) {
-        if ( intersected ) {
-          intersected.material.color.setHex( baseColor );
-        }
-
-        intersected = intersections[ 0 ].object;
-        intersected.material.color.setHex( intersectColor );
-      }
-
-      document.body.style.cursor = 'pointer';
-    } else if ( intersected ) {
-      intersected.material.color.setHex( baseColor );
-      intersected = null;
-
-      document.body.style.cursor = 'auto';
+    if (distance < 0.3) {
+      console.log('close');
     }
-
-    console.log(intersections.length);
   },
 
   /*
