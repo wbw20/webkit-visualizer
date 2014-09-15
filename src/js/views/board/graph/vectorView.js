@@ -7,7 +7,13 @@ App.VectorView = Ember.View.extend({
   draggable: 'true',
   attributeBindings: ['draggable'],
 
+  // didInsertElement: function() {
+  //   $(this.get('element')).on('drag', function(event) {
+  //     console.log('drag');
+  //   });
+  // },
+
   dragStart: function(event) {
-    debugger
+    this.set('controller.vector', this.get('vector'));
   }
 });

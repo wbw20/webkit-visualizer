@@ -1,6 +1,7 @@
 App.BoardController = Ember.ObjectController.extend({
   board: null,
   stream: null,
+  vector: null,
   data: {
     accelerometer: {
       x: 0,

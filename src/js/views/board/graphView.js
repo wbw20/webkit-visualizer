@@ -2,6 +2,9 @@ App.BoardGraphView = Ember.View.extend({
   tau: 6.283185307179586,
   dragDistance: 0.2,
   mathbox: null,
+  xData: null,
+  yData: null,
+  zData: null,
   dataBinding: 'controller.data',
 
   didInsertElement: function() {
@@ -77,20 +80,28 @@ App.BoardGraphView = Ember.View.extend({
       });
 
       self.get('controller').constantSample();
-
-      el.addEventListener('mousemove', function(event) {
-        self.onDocumentMouseMove(event);
-      }, false);
     });
   },
 
-  // onData: function(value) {
-  //   if (!this.get('mathbox')) { return; }
-  //   this.addPoint([value.data.temperature, 0, 0], 0xff0000);
-  // }.observes('data.temperature'),
+  onData: function(value) {
+    this.addPoint([value.data.temperature, 0, 0], 0xff0000);
+  },
+
+  dragStart: function(event) {
+    var self = this;
+
+    $(this.get('element')).on('mouseover', function(event) {
+      self.detectAxisCollision(event);
+    });
+  },
 
   dragEnd: function(event) {
-    alert(event);
+    this.resetAxes();
+    $(this.get('element')).off('mouseover');
+  },
+
+  drag: function(event) {
+    $(this.get('element')).trigger('mouseover');
   },
 
   drawLine: function(start, end, color) {
@@ -218,7 +229,7 @@ App.BoardGraphView = Ember.View.extend({
     return vector1[0]*vector2[0] + vector1[1]*vector2[1] + vector1[2]*vector2[2];
   },
 
-  onDocumentMouseMove: function(event) {
+  detectAxisCollision: function(event) {
     event.preventDefault();
 
     var mouseX,
@@ -292,6 +303,10 @@ App.BoardGraphView = Ember.View.extend({
         color: 0xff0000
       }, { duration: 100 });
     }
+  },
+
+  resetAxes: function() {
+    this.get('mathbox').set('axis', { color: 0xa0a0a0, lineWidth: 2 });
   },
 
   /*
