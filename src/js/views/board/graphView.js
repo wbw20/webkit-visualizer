@@ -5,6 +5,7 @@ App.BoardGraphView = Ember.View.extend({
   xData: null,
   yData: null,
   zData: null,
+  currentAxis: null,
   dataBinding: 'controller.data',
 
   didInsertElement: function() {
@@ -89,6 +90,18 @@ App.BoardGraphView = Ember.View.extend({
 
   drag: function(event) {
     this.detectAxisCollision(event.originalEvent);
+  },
+
+  dragEnd: function(event) {
+    var vector = this.get('controller.vector'),
+        axis = this.get('currentAxis');
+
+    if (axis) {
+      this.set(axis, vector);
+    }
+
+    this.resetAxes();
+    this.set('currentAxis', null);
   },
 
   drawLine: function(start, end, color) {
@@ -253,18 +266,21 @@ App.BoardGraphView = Ember.View.extend({
 
     var axes = [{
       tag: '#x',
+      name: 'xAxis',
       distance: this.distance(raycaster.ray, {
         slope: [1, 0, 0],
         offset: [0, 0, 0]
       })
     }, {
       tag: '#y',
+      name: 'yAxis',
       distance: this.distance(raycaster.ray, {
         slope: [0, 1, 0],
         offset: [0, 0, 0]
       })
     }, {
       tag: '#z',
+      name: 'zAxis',
       distance: this.distance(raycaster.ray, {
         slope: [0, 0, 1],
         offset: [0, 0, 0]
@@ -289,6 +305,8 @@ App.BoardGraphView = Ember.View.extend({
         lineWidth: 5,
         color: 0xff0000
       }, { duration: 100 });
+
+      this.set('currentAxis', min.name);
     }
   },
 
