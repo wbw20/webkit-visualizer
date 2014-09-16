@@ -87,21 +87,8 @@ App.BoardGraphView = Ember.View.extend({
     this.addPoint([value.data.temperature, 0, 0], 0xff0000);
   },
 
-  dragStart: function(event) {
-    var self = this;
-
-    $(this.get('element')).on('mouseover', function(event) {
-      self.detectAxisCollision(event);
-    });
-  },
-
-  dragEnd: function(event) {
-    this.resetAxes();
-    $(this.get('element')).off('mouseover');
-  },
-
   drag: function(event) {
-    $(this.get('element')).trigger('mouseover');
+    this.detectAxisCollision(event.originalEvent);
   },
 
   drawLine: function(start, end, color) {
@@ -243,8 +230,8 @@ App.BoardGraphView = Ember.View.extend({
         totalFaces = 0,
         intersected;
 
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouseX = (event.pageX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.pageY / window.innerHeight) * 2 + 1;
 
     var vector = new THREE.Vector3(mouseX, mouseY, camera.near);
     projector.unprojectVector(vector, camera);
