@@ -85,8 +85,24 @@ App.BoardGraphView = Ember.View.extend({
   },
 
   onData: function(value) {
-    this.addPoint([value.data.temperature, 0, 0], 0xff0000);
-  },
+    var xData = this.get('xAxis'),
+        yData = this.get('yAxis'),
+        zData = this.get('zAxis');
+
+    if (xData || yData || zData) {
+      var x = this.get('data')[xData] || 0,
+          y = this.get('data')[yData] || 0,
+          z = this.get('data')[zData] || 0;
+
+      this.addPoint([x, y, z], 0x00ff00);
+    }
+  }.observes('data'),
+
+  // onDataSetChanged: function(property, name) {
+  //   var vector = this.get(name);
+
+  //   debugger
+  // }.observes('xAxis', 'yAxis', 'zAxis'),
 
   drag: function(event) {
     this.detectAxisCollision(event.originalEvent);
