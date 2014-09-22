@@ -2,11 +2,10 @@
   <ul class="boards_list">
     {{#each board in boards}}
       <li>
-        <div class="container">
+        <div>
           <h3>{{board.productId}}</h3>
           {{#link-to "board" board}}
             <div class="board">
-              {{view App.OutlineView}}
             </div>
           {{/link-to}}
           <div class="stoplight">

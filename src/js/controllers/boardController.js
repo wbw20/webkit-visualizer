@@ -49,6 +49,7 @@ App.BoardController = Ember.ObjectController.extend({
         var string = data.toString();
         if (self.isvalidJSON(string)) {
           self.set('data', JSON.parse(data));
+          self.set('data.pressure', self.get('data.pressure')/100);
         }
       });
     });

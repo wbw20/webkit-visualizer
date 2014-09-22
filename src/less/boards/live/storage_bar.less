@@ -1,42 +1,22 @@
-.container {
-  width: 680px;
-  margin: 10px auto;
+.storage_bar {
+  float: right;
+  width: 600px;
+  height: 30px;
+  border: 1px solid @lighter_gray;
+  background-image: @light_gradient;
+  border-radius: 5px;
 
-  .label {
-    float: left;
-    height: 30px;
-    width: 40px;
-    border: 1px solid @lighter_gray;
-    border-radius: 5px;
-    background-image: @light_gradient;
+  .filled {
+    background-color: @bar_green;
+    height: 100%;
+
     text-align: center;
+    padding-top: 7px;
 
     h6 {
-      font-size: 10px;
-      margin-top: 7px;
-    }
-  }
-
-  .storage_bar {
-    float: right;
-    width: 600px;
-    height: 30px;
-    border: 1px solid @lighter_gray;
-    background-image: @light_gradient;
-    border-radius: 5px;
-
-    .filled {
-      background-color: @bar_green;
-      height: 100%;
-
-      text-align: center;
-      padding-top: 7px;
-
-      h6 {
-        text-transform: uppercase;
-        margin: 0px;
-        color: @black;
-      }
+      text-transform: uppercase;
+      margin: 0px;
+      color: @black;
     }
   }
 }
