@@ -83,7 +83,7 @@ function path() {
 }
 
 function boardRoute() {
-  return path().match(/(live|graph|gyroscope)/);
+  return /(live|graph|gyroscope)/.test(path());
 }
 
 function topShowing() {
@@ -96,12 +96,12 @@ function boardShowing() {
 
 var showTop = function() {
   $('.sidebar #top').css('display', 'block');
-  $('.sidebar .board').css('display', 'none');
+  $('.sidebar #board').css('display', 'none');
 }
 
 var showBoard = function() {
   $('.sidebar #top').css('display', 'none');
-  $('.sidebar .board').css('display', 'block');
+  $('.sidebar #board').css('display', 'block');
 }
 
 Ember.Router.reopen({
